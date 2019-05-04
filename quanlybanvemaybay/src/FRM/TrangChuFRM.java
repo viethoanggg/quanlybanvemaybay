@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 public class TrangChuFRM extends JFrame {
 
 	private JPanel contentPane;
+	private JPanel panelContent;
 	/**
 	 * Launch the application.
 	 */
@@ -66,7 +67,7 @@ public class TrangChuFRM extends JFrame {
 		JButton btnTrangChu = new JButton("Trang chủ");
 		
 		btnTrangChu.setHorizontalAlignment(SwingConstants.LEFT);
-		btnTrangChu.setIcon(new ImageIcon("E:\\Java_TH\\maybay\\images\\iconTrangChu.png"));
+		btnTrangChu.setIcon(new ImageIcon("images/iconTrangChu.png"));
 		btnTrangChu.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnTrangChu.setBackground(Color.WHITE);
 		btnTrangChu.setBounds(20, 11, 126, 46);
@@ -74,7 +75,7 @@ public class TrangChuFRM extends JFrame {
 		
 		JButton btnNavBarTimKiem = new JButton("Tìm kiếm");
 		
-		btnNavBarTimKiem.setIcon(new ImageIcon("E:\\Java_TH\\maybay\\images\\iconSearch.png"));
+		btnNavBarTimKiem.setIcon(new ImageIcon("images/iconSearch.png"));
 		btnNavBarTimKiem.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNavBarTimKiem.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNavBarTimKiem.setBackground(Color.WHITE);
@@ -83,7 +84,7 @@ public class TrangChuFRM extends JFrame {
 		
 		JButton btnBanVe = new JButton("Bán vé");
 	
-		btnBanVe.setIcon(new ImageIcon("E:\\Java_TH\\maybay\\images\\iconMayBay.png"));
+		btnBanVe.setIcon(new ImageIcon("images/iconMayBay.png"));
 		btnBanVe.setHorizontalAlignment(SwingConstants.LEFT);
 		btnBanVe.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnBanVe.setBackground(Color.WHITE);
@@ -92,7 +93,7 @@ public class TrangChuFRM extends JFrame {
 		
 		JButton btnThongKe = new JButton("Thống kê");
 		
-		btnThongKe.setIcon(new ImageIcon("E:\\Java_TH\\maybay\\images\\iconChart.png"));
+		btnThongKe.setIcon(new ImageIcon("images/iconChart.png"));
 		btnThongKe.setHorizontalAlignment(SwingConstants.LEFT);
 		btnThongKe.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnThongKe.setBackground(Color.WHITE);
@@ -101,7 +102,7 @@ public class TrangChuFRM extends JFrame {
 		
 		JButton btnQuanLy = new JButton("Quản lý");
 		
-		btnQuanLy.setIcon(new ImageIcon("E:\\Java_TH\\maybay\\images\\iconQuanLy.png"));
+		btnQuanLy.setIcon(new ImageIcon("images/iconQuanLy.png"));
 		btnQuanLy.setHorizontalAlignment(SwingConstants.LEFT);
 		btnQuanLy.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnQuanLy.setBackground(Color.WHITE);
@@ -113,7 +114,7 @@ public class TrangChuFRM extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNavbarThoat.setIcon(new ImageIcon("E:\\Java_TH\\maybay\\images\\iconExit.png"));
+		btnNavbarThoat.setIcon(new ImageIcon("images/iconExit.png"));
 		btnNavbarThoat.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNavbarThoat.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNavbarThoat.setBackground(Color.WHITE);
@@ -247,12 +248,13 @@ public class TrangChuFRM extends JFrame {
 						btnThongKeHD.setBounds(10, 207, 241, 39);
 						panelThongKe.add(btnThongKeHD);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-		JPanel panelContent = new JPanel();
+		/*panelContent = new JPanel();
 		panelContent.setBounds(291, 79, 930, 581);
 		contentPane.add(panelContent);
 		panelContent.setLayout(null);
-		panelContent.setBackground(new Color(0,0,0,0));
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		panelContent.setBackground(new Color(0,0,0,0));*/
+		
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				JPanel panelTimKiem = new JPanel();
 				panelTimKiem.setBackground(new Color(255, 255, 255));
 				panelTimKiem.setBounds(20, 79, 261, 259);
@@ -334,20 +336,15 @@ public class TrangChuFRM extends JFrame {
 		btnBanVeVMB.setBounds(10, 47, 241, 39);
 		panelBanVe.add(btnBanVeVMB);
 		
-		JLabel lblBackGround = new JLabel("");
-		lblBackGround.setIcon(new ImageIcon("E:\\Java_TH\\maybay\\images\\15-1.jpg"));
-		lblBackGround.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBackGround.setBackground(Color.WHITE);
-		lblBackGround.setBounds(0, 0, 1261, 721);
-		contentPane.add(lblBackGround);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		btnQuanLyHD.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*HoaDonFRM2 hd=new HoaDonFRM2();
+				HoaDonFRM2 hd=new HoaDonFRM2();
 				JPanel p=hd.HoaDonFRM2m();
-				panelContent.add(p);
-				p.setBounds(0,0, 622, 534);*/
+				newPanelContent(291, 79, 622, 534,p);
+				p.setBounds(0,0, 622, 534);
+				
 			}
 		});
 		
@@ -406,5 +403,22 @@ public class TrangChuFRM extends JFrame {
 				
 			}
 		});
+		
+		JLabel lblBackGround = new JLabel("");
+		lblBackGround.setIcon(new ImageIcon("images/15-1.jpg"));
+		lblBackGround.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBackGround.setBackground(Color.WHITE);
+		lblBackGround.setBounds(0, 0, 1261, 721);
+		contentPane.add(lblBackGround);
+
+	}
+	public void newPanelContent(int x,int y,int width,int height,JPanel p)
+	{
+		panelContent = new JPanel();
+		contentPane.add(panelContent);
+		panelContent.setBounds(x,y,width,height);
+		panelContent.setLayout(null);
+		panelContent.setBackground(new Color(0,0,0,0));
+		panelContent.add(p);
 	}
 }
