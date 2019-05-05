@@ -21,12 +21,15 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.JSlider;
 
 public class TrangChuFRM extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel panelContent;
+	private JPanel panelContent=new JPanel();
 	/**
 	 * Launch the application.
 	 */
@@ -51,7 +54,7 @@ public class TrangChuFRM extends JFrame {
 		setAutoRequestFocus(false);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1237, 710);
+		setBounds(100, 100, 1081, 710);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -121,13 +124,27 @@ public class TrangChuFRM extends JFrame {
 		btnNavbarThoat.setBounds(701, 11, 126, 46);
 		panel.add(btnNavbarThoat);
 		
-		JLabel lblLeVietHoang = new JLabel("Le viet hoang");
-		lblLeVietHoang.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblLeVietHoang.setForeground(Color.WHITE);
-		lblLeVietHoang.setBounds(989, 11, 126, 22);
-		panel.add(lblLeVietHoang);
+		JLabel lblTenDangNHap = new JLabel("");
+		lblTenDangNHap.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTenDangNHap.setForeground(Color.WHITE);
+		lblTenDangNHap.setBounds(931, 11, 126, 22);
+		panel.add(lblTenDangNHap);
 		
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		JLabel lblThoiGianDangNhap = new JLabel("");
+		lblThoiGianDangNhap.setForeground(Color.WHITE);
+		lblThoiGianDangNhap.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblThoiGianDangNhap.setBounds(931, 35, 126, 22);
+		panel.add(lblThoiGianDangNhap);
+		
+		long millis= System.currentTimeMillis();
+		Date date=new Date(millis);
+		SimpleDateFormat fm=new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String d= fm.format(date);
+		
+		lblTenDangNHap.setText(main.TenNV);
+		lblThoiGianDangNhap.setText(d);
+		
+///////////////////---Panel quan ly---- ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		JPanel panelQuanLy = new JPanel();
 		panelQuanLy.setBorder(new LineBorder(new Color(255, 255, 255), 2));
@@ -189,7 +206,7 @@ public class TrangChuFRM extends JFrame {
 		btnQuanLyHD.setBounds(10, 207, 241, 39);
 		panelQuanLy.add(btnQuanLyHD);
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////----Panel thong  ke-------/////////////////////////////////////////////////////////////////////////////////
 				JPanel panelThongKe = new JPanel();
 				panelThongKe.setBounds(20, 79, 261, 259);
 				contentPane.add(panelThongKe);
@@ -247,14 +264,15 @@ public class TrangChuFRM extends JFrame {
 						btnThongKeHD.setBackground(Color.BLACK);
 						btnThongKeHD.setBounds(10, 207, 241, 39);
 						panelThongKe.add(btnThongKeHD);
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		/*panelContent = new JPanel();
 		panelContent.setBounds(291, 79, 930, 581);
 		contentPane.add(panelContent);
 		panelContent.setLayout(null);
 		panelContent.setBackground(new Color(0,0,0,0));*/
 		
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////---Panel tim kiem--- ////////////////////////////////////////////////////////////////////////////////////////////
+						
 				JPanel panelTimKiem = new JPanel();
 				panelTimKiem.setBackground(new Color(255, 255, 255));
 				panelTimKiem.setBounds(20, 79, 261, 259);
@@ -313,7 +331,8 @@ public class TrangChuFRM extends JFrame {
 				btnTimKiemHD.setBounds(10, 207, 241, 39);
 				panelTimKiem.add(btnTimKiemHD);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////---Panel Ban Ve--------//////////////////////////////////////////////////////////////////////////////////
+				
 		JPanel panelBanVe = new JPanel();
 		panelBanVe.setBackground(new Color(255, 255, 255));
 		panelBanVe.setBounds(20, 79, 261, 106);
@@ -336,15 +355,31 @@ public class TrangChuFRM extends JFrame {
 		btnBanVeVMB.setBounds(10, 47, 241, 39);
 		panelBanVe.add(btnBanVeVMB);
 		
+		panelContent = new JPanel();
+		panelContent.setBackground(new Color(255, 255, 255));
+		panelContent.setBounds(350, 79,700, 592);
+		contentPane.add(panelContent);
+		panelContent.setLayout(null);
+		panelContent.setVisible(false);
+		
+		
+		JLabel lblBackGround = new JLabel("");
+		lblBackGround.setIcon(new ImageIcon("images/15-1.jpg"));
+		lblBackGround.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBackGround.setBackground(Color.WHITE);
+		lblBackGround.setBounds(-47, 0, 1155, 721);
+		
+		contentPane.add(lblBackGround);
+		
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		btnQuanLyHD.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				HoaDonFRM2 hd=new HoaDonFRM2();
-				JPanel p=hd.HoaDonFRM2m();
-				newPanelContent(291, 79, 622, 534,p);
-				p.setBounds(0,0, 622, 534);
-				
+				HoaDonFRM hd=new HoaDonFRM();
+				JPanel p=hd.HoaDonFRM();
+				newPanelContent(350,79,666,620,p);
+				p.setBounds(0,0,666,620);
+				//p.setBackground(new Color(0,0,0,0));
 			}
 		});
 		
@@ -355,6 +390,7 @@ public class TrangChuFRM extends JFrame {
 				panelThongKe.setVisible(false);
 				panelQuanLy.setVisible(false);
 				panelBanVe.setVisible(false);
+				panelContent.setVisible(false);
 			}
 		});
 		btnBanVe.addActionListener(new ActionListener() {
@@ -364,6 +400,7 @@ public class TrangChuFRM extends JFrame {
 				panelTimKiem.setVisible(false);
 				panelThongKe.setVisible(false);
 				panelQuanLy.setVisible(false);
+				panelContent.setVisible(false);
 				
 			}
 		});
@@ -374,6 +411,7 @@ public class TrangChuFRM extends JFrame {
 				panelThongKe.setVisible(false);
 				panelQuanLy.setVisible(false);
 				panelBanVe.setVisible(false);
+				panelContent.setVisible(false);
 			}
 		});
 		btnThongKe.addActionListener(new ActionListener() {
@@ -383,7 +421,7 @@ public class TrangChuFRM extends JFrame {
 				panelQuanLy.setVisible(false);
 				panelTimKiem.setVisible(false);
 				panelBanVe.setVisible(false);
-				
+				panelContent.setVisible(false);
 			}
 		});
 		btnQuanLy.addActionListener(new ActionListener() {
@@ -393,6 +431,7 @@ public class TrangChuFRM extends JFrame {
 				panelThongKe.setVisible(false);
 				panelTimKiem.setVisible(false);
 				panelBanVe.setVisible(false);
+				panelContent.setVisible(false);
 			}
 		});
 		
@@ -403,22 +442,14 @@ public class TrangChuFRM extends JFrame {
 				
 			}
 		});
-		
-		JLabel lblBackGround = new JLabel("");
-		lblBackGround.setIcon(new ImageIcon("images/15-1.jpg"));
-		lblBackGround.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBackGround.setBackground(Color.WHITE);
-		lblBackGround.setBounds(0, 0, 1261, 721);
-		contentPane.add(lblBackGround);
 
 	}
 	public void newPanelContent(int x,int y,int width,int height,JPanel p)
 	{
-		panelContent = new JPanel();
-		contentPane.add(panelContent);
-		panelContent.setBounds(x,y,width,height);
-		panelContent.setLayout(null);
+		panelContent.removeAll();
 		panelContent.setBackground(new Color(0,0,0,0));
+		panelContent.setBounds(x,y,width,height);
 		panelContent.add(p);
+		panelContent.setVisible(true);
 	}
 }

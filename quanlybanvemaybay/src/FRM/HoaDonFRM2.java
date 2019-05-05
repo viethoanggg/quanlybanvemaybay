@@ -41,7 +41,7 @@ public class HoaDonFRM2 extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,15 +57,15 @@ public class HoaDonFRM2 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HoaDonFRM2() {}
-	public JPanel HoaDonFRM2m() {
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public HoaDonFRM2() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setUndecorated(true);
-		//setBounds(100, 100, 622, 534);
-		//setTitle("Thêm hóa đơn");
+		setResizable(false);
+		setBounds(100, 100, 622, 534);
+		setTitle("Thêm hóa đơn");
 		HoaDon2 = new JPanel();
-		//HoaDon2.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//setContentPane(HoaDon2);
+		HoaDon2.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(HoaDon2);
 		HoaDon2.setLayout(null);
 		
 		JPanel panelThemHD = new JPanel();
@@ -159,7 +159,7 @@ public class HoaDonFRM2 extends JFrame {
 	//-----------------------------------------------------------------------//	
 		long millis=System.currentTimeMillis();  
 		Date date=new Date(millis);
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String d=formatter.format(date);
 		lblNgayDatVe.setText(d); 
 	//----------------------------------------------------------------------//	
@@ -253,6 +253,5 @@ public class HoaDonFRM2 extends JFrame {
 				
 			}
 		});
-		return HoaDon2;
 	}
 }

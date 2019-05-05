@@ -33,6 +33,10 @@ import java.util.Vector;
 import java.awt.event.ItemEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class ChiTietHDFRM extends JFrame {
 
@@ -55,6 +59,7 @@ public class ChiTietHDFRM extends JFrame {
 	private JTextField txtTimKiem;
 	private JTextField txtTKNC_GiaTu;
 	private JTextField txtTKNC_GiaDen;
+	private JLabel lblSoLuongVeCu;
 	/**
 	 * Launch the application.
 	 */
@@ -84,25 +89,30 @@ public class ChiTietHDFRM extends JFrame {
 	}
 	
 	public ChiTietHDFRM() {
+		setAutoRequestFocus(false);
 		setTitle("Chi Tiết hóa đơn");
 		
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 586);
+		setBounds(100, 100, 545, 586);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		tab.setBackground(new Color(255, 255, 255));
 		tab.setBounds(0, 0, 530, 554);
 		contentPane.add(tab);
 		
 		JPanel panelDSCTHD = new JPanel();
+		panelDSCTHD.setBackground(new Color(240, 255, 255));
 		tab.addTab("Danh sách chi tiết HĐ", null, panelDSCTHD, null);
 		panelDSCTHD.setLayout(null);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(245, 255, 250));
 		panel_2.setLayout(null);
 		panel_2.setBorder(new TitledBorder(null, "Danh s\u00E1ch chi ti\u1EBFt H\u0110", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.setBounds(0, 11, 525, 198);
+		panel_2.setBounds(0, 110, 525, 198);
 		panelDSCTHD.add(panel_2);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -112,114 +122,136 @@ public class ChiTietHDFRM extends JFrame {
 		tblCTHD = new JTable();
 		scrollPane.setViewportView(tblCTHD);
 		
-		JButton btnThem_DSCTHD = new JButton("Thêm");
-
-		btnThem_DSCTHD.setBounds(60, 458, 89, 23);
-		panelDSCTHD.add(btnThem_DSCTHD);
-		
-		JButton btnSua_DSCTHD = new JButton("Sửa");
-
-		btnSua_DSCTHD.setBounds(236, 458, 89, 23);
-		panelDSCTHD.add(btnSua_DSCTHD);
-		
-		JButton btnXoa_DSCTHD = new JButton("Xóa");
-
-		btnXoa_DSCTHD.setBounds(356, 458, 89, 23);
-		panelDSCTHD.add(btnXoa_DSCTHD);
-		
-		JButton btnCapNhatDSCTHD = new JButton("Cập nhật DSCTHD");
-		btnCapNhatDSCTHD.setBounds(60, 492, 141, 23);
-		panelDSCTHD.add(btnCapNhatDSCTHD);
-		
-		JButton button_4 = new JButton("Đặt lại");
-		button_4.setBounds(236, 492, 89, 23);
-		panelDSCTHD.add(button_4);
-		
-		JButton button_5 = new JButton("Thoát");
-		button_5.setBounds(356, 492, 89, 23);
-		panelDSCTHD.add(button_5);
-		
 		JLabel label = new JLabel("Mã HĐ");
-		label.setBounds(60, 309, 75, 23);
+		label.setBounds(60, 366, 75, 23);
 		panelDSCTHD.add(label);
 		
 		JLabel label_2 = new JLabel("Mã vé");
-		label_2.setBounds(60, 343, 75, 24);
+		label_2.setBounds(60, 400, 75, 24);
 		panelDSCTHD.add(label_2);
 		
 		JLabel label_3 = new JLabel("Mã hạng vé");
-		label_3.setBounds(60, 378, 75, 27);
+		label_3.setBounds(60, 435, 75, 27);
 		panelDSCTHD.add(label_3);
 		
 		JLabel lblMaHD_CTHD = new JLabel("");
-		lblMaHD_CTHD.setBounds(142, 309, 129, 23);
+		lblMaHD_CTHD.setBounds(142, 366, 129, 23);
 		panelDSCTHD.add(lblMaHD_CTHD);
 		
 		JLabel lblMaVe = new JLabel("");
-		lblMaVe.setBounds(142, 344, 129, 23);
+		lblMaVe.setBounds(142, 401, 129, 23);
 		panelDSCTHD.add(lblMaVe);
 		
 		JLabel lblMaHangVe = new JLabel("");
-		lblMaHangVe.setBounds(142, 380, 129, 23);
+		lblMaHangVe.setBounds(142, 437, 129, 23);
 		panelDSCTHD.add(lblMaHangVe);
 		
 		JLabel label_7 = new JLabel("Tên KHD");
-		label_7.setBounds(294, 309, 69, 23);
+		label_7.setBounds(294, 366, 69, 23);
 		panelDSCTHD.add(label_7);
 		
 		JLabel label_8 = new JLabel("Tên chặng");
-		label_8.setBounds(294, 343, 69, 23);
+		label_8.setBounds(294, 400, 69, 23);
 		panelDSCTHD.add(label_8);
 		
 		JLabel label_9 = new JLabel("Giá vé");
-		label_9.setBounds(294, 378, 69, 23);
+		label_9.setBounds(294, 435, 69, 23);
 		panelDSCTHD.add(label_9);
 		
 		JLabel label_10 = new JLabel("VISA");
-		label_10.setBounds(294, 411, 69, 23);
+		label_10.setBounds(294, 468, 69, 23);
 		panelDSCTHD.add(label_10);
 		
-		JLabel lblTenKHD = new JLabel("");
-		lblTenKHD.setBounds(368, 279, 157, 23);
-		panelDSCTHD.add(lblTenKHD);
-		
 		JLabel lblTenChang = new JLabel("");
-		lblTenChang.setBounds(368, 314, 157, 23);
+		lblTenChang.setBounds(357, 401, 157, 23);
 		panelDSCTHD.add(lblTenChang);
 		
 		JLabel lblGiaVe = new JLabel("");
-		lblGiaVe.setBounds(368, 348, 157, 23);
+		lblGiaVe.setBounds(357, 435, 157, 23);
 		panelDSCTHD.add(lblGiaVe);
 		
 		JLabel lblVISA = new JLabel("");
-		lblVISA.setBounds(368, 381, 157, 23);
+		lblVISA.setBounds(357, 468, 157, 23);
 		panelDSCTHD.add(lblVISA);
 		
 		JLabel label_4 = new JLabel("Tìm Kiếm");
-		label_4.setBounds(28, 220, 58, 27);
+		label_4.setBounds(28, 328, 58, 27);
 		panelDSCTHD.add(label_4);
 		
 		txtTimKiem = new JTextField();
 		txtTimKiem.setColumns(10);
-		txtTimKiem.setBounds(114, 220, 141, 27);
+		txtTimKiem.setBounds(114, 328, 141, 27);
 		panelDSCTHD.add(txtTimKiem);
 		
 		JComboBox cbbTimKiem = new JComboBox();
+		cbbTimKiem.setBackground(new Color(255, 255, 255));
 		cbbTimKiem.setModel(new DefaultComboBoxModel(new String[] {"--Chọn-- ", "MaHD", "MaVe", "MaHangVe", "TenKH", "TenChang"}));
-		cbbTimKiem.setBounds(280, 220, 109, 24);
+		cbbTimKiem.setBounds(280, 328, 109, 27);
 		panelDSCTHD.add(cbbTimKiem);
 		
-		JButton btnTimKiem = new JButton("Tìm Kiếm");
-
-		btnTimKiem.setBounds(415, 220, 89, 27);
+		JButton btnTimKiem = new JButton("");
+		btnTimKiem.setIcon(new ImageIcon("images/iconSearch.png"));
+		btnTimKiem.setBackground(new Color(255, 255, 255));
+		btnTimKiem.setBounds(413, 328, 32, 27);
+		btnTimKiem.setBorder(new EmptyBorder(0,0,0,0));
 		panelDSCTHD.add(btnTimKiem);
 		
-		JButton btnTimKiemNangCao = new JButton("Tìm kiếm nâng cao");
+		JButton btnThem_DSCTHD = new JButton("");
+		btnThem_DSCTHD.setIcon(new ImageIcon("images/icons8-plus-48.png"));
+		btnThem_DSCTHD.setBackground(new Color(255, 255, 255));
+		btnThem_DSCTHD.setBounds(357, 62, 46, 45);
+		btnThem_DSCTHD.setBorder(new EmptyBorder(0,0,0,0));
+		panelDSCTHD.add(btnThem_DSCTHD);
 		
-		btnTimKiemNangCao.setBounds(363, 262, 141, 27);
-		panelDSCTHD.add(btnTimKiemNangCao);
+		JButton btnSua_DSCTHD = new JButton("");
+		btnSua_DSCTHD.setIcon(new ImageIcon("images/icons8-maintenance-48.png"));
+		btnSua_DSCTHD.setBackground(new Color(255, 255, 255));
+		btnSua_DSCTHD.setBounds(413, 62, 46, 45);
+		btnSua_DSCTHD.setBorder(new EmptyBorder(0,0,0,0));
+		panelDSCTHD.add(btnSua_DSCTHD);
+		
+		JButton btnXoa_DSCTHD = new JButton("");
+		btnXoa_DSCTHD.setIcon(new ImageIcon("images/icons8-cancel-48.png"));
+		btnXoa_DSCTHD.setBackground(new Color(255, 255, 255));
+		btnXoa_DSCTHD.setBounds(469, 62, 46, 45);
+		btnXoa_DSCTHD.setBorder(new EmptyBorder(0,0,0,0));
+		panelDSCTHD.add(btnXoa_DSCTHD);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.BLACK);
+		panel_3.setBounds(0, 0, 525, 51);
+		panelDSCTHD.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JButton btnCapNhatDSCTHD = new JButton("Cập nhật DSCTHD");
+		btnCapNhatDSCTHD.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCapNhatDSCTHD.setIcon(new ImageIcon("images/icons8-refresh-16.png"));
+		btnCapNhatDSCTHD.setBackground(new Color(255, 255, 255));
+		btnCapNhatDSCTHD.setHorizontalAlignment(SwingConstants.LEFT);
+		btnCapNhatDSCTHD.setBounds(10, 12, 176, 32);
+		panel_3.add(btnCapNhatDSCTHD);
+		
+		JButton button_5 = new JButton("Thoát");
+		button_5.setIcon(new ImageIcon("images/iconExit.png"));
+		button_5.setHorizontalAlignment(SwingConstants.LEFT);
+		button_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button_5.setBackground(new Color(255, 255, 255));
+		button_5.setBounds(216, 12, 105, 32);
+		panel_3.add(button_5);
+		
+		JLabel label_5 = new JLabel("");
+		label_5.setBounds(378, 370, 46, 14);
+		panelDSCTHD.add(label_5);
+		
+		JLabel lblTenKHD = new JLabel("");
+		lblTenKHD.setBounds(357, 366, 157, 23);
+		panelDSCTHD.add(lblTenKHD);
+		
+		
+		
 		
 		JPanel panelThemCTHD = new JPanel();
+		panelThemCTHD.setBackground(new Color(224, 255, 255));
 		tab.addTab("Thêm", null, panelThemCTHD, null);
 		panelThemCTHD.setLayout(null);
 		
@@ -234,6 +266,7 @@ public class ChiTietHDFRM extends JFrame {
 		txtMaHD_Them.setColumns(10);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(224, 255, 255));
 		panel.setBorder(new TitledBorder(null, "Th\u00EAm KHD", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 83, 515, 153);
 		panelThemCTHD.add(panel);
@@ -282,6 +315,7 @@ public class ChiTietHDFRM extends JFrame {
 		panel.add(btnThemKHDMoi);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(224, 255, 255));
 		panel_1.setBorder(new TitledBorder(null, "Th\u00EAm v\u00E9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(10, 259, 515, 207);
 		panelThemCTHD.add(panel_1);
@@ -340,6 +374,11 @@ public class ChiTietHDFRM extends JFrame {
 		txtSoLuongVe.setBounds(140, 46, 156, 24);
 		panelThemCTHD.add(txtSoLuongVe);
 		
+		lblSoLuongVeCu = new JLabel("");
+		lblSoLuongVeCu.setBackground(new Color(224, 255, 255));
+		lblSoLuongVeCu.setBounds(318, 46, 46, 20);
+		panelThemCTHD.add(lblSoLuongVeCu);
+		
 		JButton btnThemCTHD = new JButton("Thêm");
 		btnThemCTHD.setBounds(130, 477, 89, 34);
 		panelThemCTHD.add(btnThemCTHD);
@@ -352,7 +391,9 @@ public class ChiTietHDFRM extends JFrame {
 		btnThoat_Them.setBounds(399, 477, 89, 34);
 		panelThemCTHD.add(btnThoat_Them);
 		
+		
 		JPanel panelSuaCTHD = new JPanel();
+		panelSuaCTHD.setBackground(new Color(224, 255, 255));
 		tab.addTab("Sửa", null, panelSuaCTHD, null);
 		panelSuaCTHD.setLayout(null);
 		
@@ -432,7 +473,85 @@ public class ChiTietHDFRM extends JFrame {
 
 		setTable();
 		setVisible(true);
+
+///////////////////////////////////////////////////////////////////////////////////////
+		btnCapNhatDSCTHD.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChiTietHDBUS bus=new ChiTietHDBUS();
+				bus.docDSCTHD();
+				newTableCTHD();
+				newDataCTHD();
+				
+			}
+		});
+
+btnXoa_DSCTHD.addActionListener(new ActionListener() {
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		int i=tblCTHD.getSelectedRow();
 		
+		int c=JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa");
+
+		if(c==0)
+		{
+			if(i>=0) 
+			{
+				JOptionPane.showMessageDialog(null,"Đã xóa.");
+				String mahd=tblCTHD.getModel().getValueAt(i,0).toString();
+				String mave=tblCTHD.getModel().getValueAt(i,1).toString();
+				
+				ChiTietHDBUS bus=new ChiTietHDBUS();
+				bus.xoa(mahd,mave,i);
+				
+				model.removeRow(i);
+				tblCTHD.setModel(model);
+			}
+			else JOptionPane.showMessageDialog(null,"Vui lòng chọn chi tiết hóa đơn cần xóa.");
+		}
+	}
+});
+
+btnSua_DSCTHD.addActionListener(new ActionListener() {
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		int i=tblCTHD.getSelectedRow();
+		if(i>=0) 
+		{
+			String mahd=tblCTHD.getModel().getValueAt(i,0).toString();
+			String mave=tblCTHD.getModel().getValueAt(i,1).toString();
+			String makh="";
+			sua(mahd,mave,makh);
+			tab.setEnabledAt(0,true);
+		}
+		else JOptionPane.showMessageDialog(null,"Vui lòng chọn chi tiết hóa đơn cần sửa.");
+	}
+});
+
+btnThem_DSCTHD.addActionListener(new ActionListener() {
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		int i=tblCTHD.getSelectedRow();
+		int d=0;
+		if(i>=0)
+		{
+			String mahd=tblCTHD.getModel().getValueAt(i,0).toString();
+			for(ChiTietHDDTO ct : ChiTietHDBUS.dscthd)
+			{
+				if(ct.getMaHD().equals(mahd))
+					d++;
+				
+			}
+			
+			them(mahd,d);
+			tab.setEnabledAt(0,true);
+		}
+		else JOptionPane.showMessageDialog(null,"Vui lòng chọn hóa đơn cần thêm.");
+	}
+});
 		rbtnVe.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -482,84 +601,6 @@ public class ChiTietHDFRM extends JFrame {
 				}
 			}
 		});
-		
-		btnThem_DSCTHD.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				int i=tblCTHD.getSelectedRow();
-				int d=0;
-				if(i>=0)
-				{
-					String mahd=tblCTHD.getModel().getValueAt(i,0).toString();
-					for(ChiTietHDDTO ct : ChiTietHDBUS.dscthd)
-					{
-						if(ct.getMaHD().equals(mahd))
-							d++;
-						
-					}
-					
-					them(mahd,d);
-					tab.setEnabledAt(0,true);
-				}
-				else JOptionPane.showMessageDialog(null,"Vui lòng chọn hóa đơn cần thêm.");
-			}
-		});
-		
-		btnSua_DSCTHD.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				int i=tblCTHD.getSelectedRow();
-				if(i>=0) 
-				{
-					String mahd=tblCTHD.getModel().getValueAt(i,0).toString();
-					String mave=tblCTHD.getModel().getValueAt(i,1).toString();
-					String makh="";
-					sua(mahd,mave,makh);
-					tab.setEnabledAt(0,true);
-				}
-				else JOptionPane.showMessageDialog(null,"Vui lòng chọn chi tiết hóa đơn cần sửa.");
-			}
-		});
-		
-		btnXoa_DSCTHD.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int i=tblCTHD.getSelectedRow();
-				
-				int c=JOptionPane.showConfirmDialog(null,"Bạn có chắc muốn xóa");
-
-				if(c==0)
-				{
-					if(i>=0) 
-					{
-						JOptionPane.showMessageDialog(null,"Đã xóa.");
-						String mahd=tblCTHD.getModel().getValueAt(i,0).toString();
-						String mave=tblCTHD.getModel().getValueAt(i,1).toString();
-						
-						ChiTietHDBUS bus=new ChiTietHDBUS();
-						bus.xoa(mahd,mave,i);
-						
-						model.removeRow(i);
-						tblCTHD.setModel(model);
-					}
-					else JOptionPane.showMessageDialog(null,"Vui lòng chọn chi tiết hóa đơn cần xóa.");
-				}
-			}
-		});
-		
-		btnCapNhatDSCTHD.addActionListener(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						ChiTietHDBUS bus=new ChiTietHDBUS();
-						bus.docDSCTHD();
-						newTableCTHD();
-						newDataCTHD();
-						
-					}
-				});
 		btnTimKiem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -609,57 +650,6 @@ public class ChiTietHDFRM extends JFrame {
 			}
 			
 		});
-		
-		btnTimKiemNangCao.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				txtTKNC_GiaTu =new JTextField();
-				txtTKNC_GiaDen =new JTextField();
-				
-				Object []tknc= {
-						"Nhập khoảng giá",
-						"Từ",txtTKNC_GiaTu,
-						"Đến",txtTKNC_GiaDen,
-					};
-				
-				int i=JOptionPane.showConfirmDialog(getParent(),tknc,"Nhập những giá trị cần tìm",JOptionPane.OK_CANCEL_OPTION);
-				int flag=0;
-				
-				for(int j=0;j<txtTKNC_GiaTu.getText().length();j++)
-				{
-					if(txtTKNC_GiaTu.getText().charAt(j)<'0' || txtTKNC_GiaTu.getText().charAt(j)>'9')
-					{
-						JOptionPane.showMessageDialog(null,"Giá tiền nhập không hợp lệ.");
-						flag=1;
-					}
-				}
-				
-				for(int j=0;j<txtTKNC_GiaDen.getText().length();j++)
-				{
-					if(txtTKNC_GiaDen.getText().charAt(j)<'0' || txtTKNC_GiaDen.getText().charAt(j)>'9')
-					{
-						JOptionPane.showMessageDialog(null,"Giá tiền nhập không hợp lệ.");
-						flag=1;
-					}
-				}
-				if(flag==0 && Integer.valueOf(txtTKNC_GiaDen.getText())<Integer.valueOf(txtTKNC_GiaTu.getText()))
-				{
-					JOptionPane.showMessageDialog(null,"Giá tiền nhập không hợp lệ.");
-					flag=1;
-				}
-				
-				if(txtTKNC_GiaTu.getText()=="" && txtTKNC_GiaDen.getText()=="")
-					flag=1;
-				
-				if(flag==0)
-				{
-					newTableCTHD();
-					ChiTietHDBUS bus=new ChiTietHDBUS();
-					bus.timKiemNangCao(txtTKNC_GiaTu.getText(),txtTKNC_GiaDen.getText());
-					newDataCTHD();
-				}
-			}
-		});
 	}
 	
 	public void newTableCTHD()
@@ -705,6 +695,7 @@ public class ChiTietHDFRM extends JFrame {
 		tab.setEnabledAt(0,false);
 		txtMaHD_Them.setText(MaHD);
 		txtSoLuongVe.setText(String.valueOf(soluongve));
+		lblSoLuongVeCu.setText(String.valueOf(soluongve));
 	}
 	public void sua(String MaHD,String maVe,String maKH)
 	{

@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class main extends JFrame {
 	public static String TenNV="Lê Việt Hoàng";
@@ -47,10 +48,12 @@ public class main extends JFrame {
 	 * Create the frame.
 	 */
 	public main() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images/iconMayBay.png"));
 		setAutoRequestFocus(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 257);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -111,7 +114,7 @@ public class main extends JFrame {
 		JLabel lblBackGround = new JLabel("");
 		lblBackGround.setIcon(new ImageIcon("images/hinh-nen-may-bay-dep-2.jpg"));
 		lblBackGround.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBackGround.setBounds(0, 0, 434, 218);
+		lblBackGround.setBounds(0, 0, 444, 228);
 		contentPane.add(lblBackGround);
 	}
 }
