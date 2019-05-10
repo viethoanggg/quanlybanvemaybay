@@ -1,0 +1,13 @@
+Mã Vé	Mã Ghế	Mã Khách	Mã Chuyến Bay	Tên Hạng Vé	Giá Vé(VND)	Hãng	Giá Trị Giảm(%)	Visa	
+TN_01	T02	KHD_01	VN431	Business Class	1620000	Vietnam Airlines	10.0		
+TN_02	A02	KHD_02	VN431	Economy Class	1440000	Vietnam Airlines	10.0		
+TN_03	F01	KHD_03	VN320	First Class	1620000	Vietnam Airlines	20.0		
+TN_04	P01	KHD_12	VN280	Premium Class	3140000	Jetstar Pacific Airlines	20.0		
+TN_05	C01	KHD_13	VN374	Economy Class	1250000	Jetstar Pacific Airlines	50.0		
+TN_06	F01	KHD_10	VN830	First Class	1596000	VietJet Air	20.0		
+TN_07	C01	KHD_19	VN374	Economy Class	1250000	Jetstar Pacific Airlines	50.0		
+TN_08	F03	KHD_20	VN320	First Class	1620000	VietJet Air	10.0		
+TN_09	C01	KHD_21	VN280	Economy Class	1912500	Vietnam Airlines	50.0		
+TN_10	T04	KHD_22	VN840	Business Class	1516000	VietJet Air	20.0		
+TN_11	T05	KHD_23	VN374	Business Class	2160000	Vietnam Airlines	20.0		
+TN_12	F01	KHD_24	VN830	First Class	997500	Jetstar Pacific Airlines	50.0		

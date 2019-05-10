@@ -54,7 +54,7 @@ public class TrangChuFRM extends JFrame {
 		setAutoRequestFocus(false);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1081, 710);
+		setBounds(100, 100, 1264, 710);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,7 +63,7 @@ public class TrangChuFRM extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(25, 25, 112));
-		panel.setBounds(0, 0, 1261, 68);
+		panel.setBounds(0, 0, 1273, 68);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -208,7 +208,7 @@ public class TrangChuFRM extends JFrame {
 		
 ///////////////----Panel thong  ke-------/////////////////////////////////////////////////////////////////////////////////
 				JPanel panelThongKe = new JPanel();
-				panelThongKe.setBounds(20, 79, 261, 259);
+				panelThongKe.setBounds(20, 79, 261, 174);
 				contentPane.add(panelThongKe);
 				panelThongKe.setLayout(null);
 				panelThongKe.setBackground(Color.WHITE);
@@ -220,31 +220,13 @@ public class TrangChuFRM extends JFrame {
 						lblThongKe.setBounds(66, 11, 124, 25);
 						panelThongKe.add(lblThongKe);
 						
-						JButton btnThongKeVMB = new JButton("Vé máy bay");
-						btnThongKeVMB.setHorizontalAlignment(SwingConstants.LEFT);
-						btnThongKeVMB.setForeground(Color.WHITE);
-						btnThongKeVMB.setFont(new Font("Tahoma", Font.BOLD, 12));
-						btnThongKeVMB.setBorder(new MatteBorder(0,5,0,0,Color.red));
-						btnThongKeVMB.setBackground(Color.BLACK);
-						btnThongKeVMB.setBounds(10, 47, 241, 39);
-						panelThongKe.add(btnThongKeVMB);
-						
-						JButton btnThongKeKH = new JButton("Khách hàng");
-						btnThongKeKH.setHorizontalAlignment(SwingConstants.LEFT);
-						btnThongKeKH.setForeground(Color.WHITE);
-						btnThongKeKH.setFont(new Font("Tahoma", Font.BOLD, 12));
-						btnThongKeKH.setBorder(new MatteBorder(0,5,0,0,Color.red));
-						btnThongKeKH.setBackground(Color.BLACK);
-						btnThongKeKH.setBounds(10, 87, 241, 39);
-						panelThongKe.add(btnThongKeKH);
-						
 						JButton btnThongKeCB = new JButton("Chuyến bay");
 						btnThongKeCB.setHorizontalAlignment(SwingConstants.LEFT);
 						btnThongKeCB.setForeground(Color.WHITE);
 						btnThongKeCB.setFont(new Font("Tahoma", Font.BOLD, 12));
 						btnThongKeCB.setBorder(new MatteBorder(0,5,0,0,Color.red));
 						btnThongKeCB.setBackground(Color.BLACK);
-						btnThongKeCB.setBounds(10, 127, 241, 39);
+						btnThongKeCB.setBounds(10, 47, 241, 39);
 						panelThongKe.add(btnThongKeCB);
 						
 						JButton btnThongKeChangBay = new JButton("Chặng bay");
@@ -253,7 +235,7 @@ public class TrangChuFRM extends JFrame {
 						btnThongKeChangBay.setFont(new Font("Tahoma", Font.BOLD, 12));
 						btnThongKeChangBay.setBorder(new MatteBorder(0,5,0,0,Color.red));
 						btnThongKeChangBay.setBackground(Color.BLACK);
-						btnThongKeChangBay.setBounds(10, 167, 241, 39);
+						btnThongKeChangBay.setBounds(10, 87, 241, 39);
 						panelThongKe.add(btnThongKeChangBay);
 						
 						JButton btnThongKeHD = new JButton("Hóa đơn");
@@ -262,7 +244,7 @@ public class TrangChuFRM extends JFrame {
 						btnThongKeHD.setFont(new Font("Tahoma", Font.BOLD, 12));
 						btnThongKeHD.setBorder(new MatteBorder(0,5,0,0,Color.red));
 						btnThongKeHD.setBackground(Color.BLACK);
-						btnThongKeHD.setBounds(10, 207, 241, 39);
+						btnThongKeHD.setBounds(10, 127, 241, 39);
 						panelThongKe.add(btnThongKeHD);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		/*panelContent = new JPanel();
@@ -367,7 +349,7 @@ public class TrangChuFRM extends JFrame {
 		lblBackGround.setIcon(new ImageIcon("images/15-1.jpg"));
 		lblBackGround.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBackGround.setBackground(Color.WHITE);
-		lblBackGround.setBounds(-47, 0, 1155, 721);
+		lblBackGround.setBounds(-47, 0, 1345, 721);
 		
 		contentPane.add(lblBackGround);
 		
@@ -375,14 +357,23 @@ public class TrangChuFRM extends JFrame {
 		btnQuanLyHD.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				HoaDonFRM hd=new HoaDonFRM();
+				/*HoaDonFRM hd=new HoaDonFRM();
 				JPanel p=hd.HoaDonFRM();
 				newPanelContent(350,79,666,620,p);
 				p.setBounds(0,0,666,620);
-				//p.setBackground(new Color(0,0,0,0));
+				//p.setBackground(new Color(0,0,0,0));*/
 			}
 		});
-		
+		btnTimKiemHD.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TimKiemHD tk=new TimKiemHD();
+				JPanel p=tk.TimKiemHD();
+				newPanelContent(350,79, 648, 565,p);
+				p.setBounds(0, 0, 648, 565);
+				
+			}
+		});
 		btnTrangChu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

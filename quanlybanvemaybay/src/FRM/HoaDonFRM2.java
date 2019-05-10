@@ -31,6 +31,10 @@ import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class HoaDonFRM2 extends JFrame {
 
@@ -58,6 +62,11 @@ public class HoaDonFRM2 extends JFrame {
 	 * Create the frame.
 	 */
 	public HoaDonFRM2() {
+		HoaDonBUS hdbus=new HoaDonBUS();
+		hdbus.docDSHD();
+		KhachHangBUS khbus=new KhachHangBUS();
+		khbus.docDSKH();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setUndecorated(true);
 		setResizable(false);
@@ -69,6 +78,7 @@ public class HoaDonFRM2 extends JFrame {
 		HoaDon2.setLayout(null);
 		
 		JPanel panelThemHD = new JPanel();
+		panelThemHD.setBackground(Color.WHITE);
 		panelThemHD.setBounds(0, 0, 606, 495);
 		HoaDon2.add(panelThemHD);
 		panelThemHD.setLayout(null);
@@ -95,11 +105,11 @@ public class HoaDonFRM2 extends JFrame {
 		panelThemHD.add(lblTnNv);
 		
 		JLabel lblTenNV = new JLabel("");
-		lblTenNV.setText(main.TenNV);
 		lblTenNV.setBounds(180, 59, 279, 26);
 		panelThemHD.add(lblTenNV);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(null, "Th\u00F4ng tin ng\u01B0\u1EDDi mua", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(30, 207, 521, 186);
 		panelThemHD.add(panel);
@@ -109,15 +119,11 @@ public class HoaDonFRM2 extends JFrame {
 		rbnKHC.setBounds(18, 29, 71, 23);
 		panel.add(rbnKHC);
 		
-		JRadioButton rbnKHM = new JRadioButton("KH mới");
-		rbnKHM.setBounds(130, 29, 71, 23);
-		panel.add(rbnKHM);
-		
 		ButtonGroup g=new ButtonGroup(); 
 		g.add(rbnKHC);
-		g.add(rbnKHM);
 		
 		JPanel panelKHC = new JPanel();
+		panelKHC.setBackground(Color.WHITE);
 		panelKHC.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panelKHC.setBounds(18, 73, 493, 96);
 		panel.add(panelKHC);
@@ -135,14 +141,25 @@ public class HoaDonFRM2 extends JFrame {
 		lblMKh.setBounds(10, 11, 81, 27);
 		panelKHC.add(lblMKh);
 		
-		JComboBox cbbMaKH = new JComboBox();
-		cbbMaKH.setBounds(266, 12, 126, 24);
-		panelKHC.add(cbbMaKH);
-		
 		txtMaKH = new JTextField();
-		txtMaKH.setBounds(101, 11, 155, 27);
+		
+		txtMaKH.setBounds(151, 11, 126, 27);
 		panelKHC.add(txtMaKH);
 		txtMaKH.setColumns(10);
+		
+		JLabel lblKhm = new JLabel("KHM_");
+		lblKhm.setBounds(101, 11, 51, 27);
+		panelKHC.add(lblKhm);
+		
+		JLabel lblnhpS = new JLabel("(Nhập số)");
+		lblnhpS.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		lblnhpS.setBounds(287, 11, 90, 27);
+		panelKHC.add(lblnhpS);
+		
+		JButton btnThemKH = new JButton("Thêm KH mới");
+		
+		btnThemKH.setBounds(378, 29, 133, 23);
+		panel.add(btnThemKH);
 		
 		JButton btnThemHD = new JButton(" Thêm HĐ");
 		btnThemHD.setBounds(86, 404, 101, 33);
@@ -185,14 +202,17 @@ public class HoaDonFRM2 extends JFrame {
 		btnThemCTHD.setEnabled(false);
 		panelThemHD.add(btnThemCTHD);
 		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 		
 		btnThemHD.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String mahd=txtMaHD.getText();
-				String makh=txtMaKH.getText();
+				String makh="KHM_"+txtMaKH.getText();
 				int flag=0;
+				
+				
 				for(HoaDonDTO hd : HoaDonBUS.dshd)
 				{
 					if(mahd.equals(hd.getMaHD()))
@@ -202,14 +222,20 @@ public class HoaDonFRM2 extends JFrame {
 					}
 				}
 				
-				/*for(KhacHangDTO kh : KhachHangBUS.dskh)
+			
+				
+				for(KhachHangDTO kh : KhachHangBUS.dskh)	
 				{
-					if(makh.equals(kh.getMaHD()))
+					flag=2;
+					if(makh.equals(kh.MaKH))
 					{
-						JOptionPane.showMessageDialog(null,"Mã KH Không hợp lệ.");
-						flag=1;
+						flag=0;
+						break;
 					}
-				}*/
+				}
+				if(flag==2) JOptionPane.showMessageDialog(null,"Mã KH không hop le.");
+				if(mahd.equals("")) flag=1;
+				if(makh.equals("")) flag=1;
 				if(flag==0)
 				{
 					JOptionPane.showMessageDialog(null,"Đã thêm hóa đơn.");
@@ -226,6 +252,26 @@ public class HoaDonFRM2 extends JFrame {
 					bus.them(hd);
 				}
 				
+			}
+		});
+		
+		txtMaKH.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				
+				String makh="KHM_"+txtMaKH.getText();
+				for(KhachHangDTO kh : KhachHangBUS.dskh)	
+				{
+					if(makh.equals(kh.MaKH))
+					{
+						lblTenKH.setText(kh.getTenKH());
+						break;
+					}
+					else
+					{
+						lblTenKH.setText("");
+					}	
+				}
 			}
 		});
 		
@@ -251,6 +297,12 @@ public class HoaDonFRM2 extends JFrame {
 				txtMaHD.setText("");
 				txtMaKH.setText("");
 				
+			}
+		});
+		btnThemKH.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ThemKH themkh=new ThemKH();
 			}
 		});
 	}

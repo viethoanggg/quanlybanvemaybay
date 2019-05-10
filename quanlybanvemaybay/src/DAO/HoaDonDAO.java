@@ -7,10 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
-import BUS.MySQLConnect;
 import DTO.HoaDonDTO;
 
 public class HoaDonDAO {
@@ -142,20 +142,25 @@ public class HoaDonDAO {
 	return dshd;
 	}
 	
-	public ArrayList timKiemNangCao(String maKH,String maNV,String nt,String nd,String gt,String gd)
+	public ArrayList timKiemNangCao(String nt,String nd,String gt,String gd)
 	{
 		ArrayList<HoaDonDTO> dshd=new ArrayList<HoaDonDTO>();
 		try
 		{
-			String query="select * from hoadon where ";
-			if(maKH!="") 
-				query+=" MaKH LIKE '%"+maKH+"%' ";
-			if(maNV!="") 
-				query+="and MaNV LIKE '%"+maNV+"%' ";
+			String query="select * from hoadon where MaHD like '%%' ";
 			if(nt.equals("")==false && nd.equals("")==false) 
-				query+="and NgayDatVe BETWEEN '"+nt+"' and '"+nd+"' ";
+				query+=" and NgayDatVe BETWEEN '"+nt+"' and '"+nd+"' ";
+			else if(nt.equals("")==false && nd.equals("")!=false)
+				query+=" and NgayDatVe >= "+"'"+nt+"'";
+			else if(nt.equals("")!=false && nd.equals("")==false)
+				query+=" and NgayDatVe <= "+"'"+nd+"'";
 			if(gt.equals("")==false && gd.equals("")==false) 
-				query+="and ThanhTien BETWEEN "+gt+" and "+gd;
+				query+=" and ThanhTien BETWEEN "+gt+" and "+gd;
+			else if(gt.equals("")==false && gd.equals("")!=false) 
+				query+=" and ThanhTien >="+gt;
+			else if(gt.equals("")!=false && gd.equals("")==false) 
+				query+=" and ThanhTien <="+gd;
+			
 			hoadon.executeQuery(query);
 			
 			while(hoadon.getResult().next()==true)
@@ -176,5 +181,95 @@ public class HoaDonDAO {
 		}
 		hoadon.close();
 		return dshd;
+	}
+	public ArrayList timkiemtheoquy(String qt,String qd)
+	{
+		ArrayList<HoaDonDTO> dshd=new ArrayList<HoaDonDTO>();
+		try
+		{
+			String query="select * from hoadon where ";
+			if(qt.equals("")==false && qd.equals("")==false)
+				query+="NgayDatVe BETWEEN '"+qt+"' and '"+qd+"'";
+			hoadon.executeQuery(query);
+			while(hoadon.getResult().next()==true)
+			{
+				HoaDonDTO hd=new HoaDonDTO();
+				hd.setMaHD(hoadon.getResult().getString(1));
+				hd.setMaKH(hoadon.getResult().getString(2));
+				hd.setMaNV(hoadon.getResult().getString(3));
+				hd.setNgayDatVe(hoadon.getResult().getString(4));
+				hd.setSoLuongVe(hoadon.getResult().getInt(5));
+				hd.setThanhTien(hoadon.getResult().getInt(6));
+				dshd.add(hd);
+			}
+					
+		}
+		catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(null,"Lỗi tìm kiếm nâng cao theo quy DAO.");
+		}
+		hoadon.close();
+		return dshd;
+	}
+	
+	public Vector thongKeHD(String nt,String nd,String gt,String gd)
+	{
+		Vector a = new Vector();
+		try
+		{
+			String query="select sum(SoLuong) as 'SL',sum(ThanhTien) as 'TT' from hoadon where MaHD like '%%' ";
+			if(nt.equals("")==false && nd.equals("")==false) 
+				query+=" and NgayDatVe BETWEEN '"+nt+"' and '"+nd+"' ";
+			else if(nt.equals("")==false && nd.equals("")!=false)
+				query+=" and NgayDatVe >= "+"'"+nt+"'";
+			else if(nt.equals("")!=false && nd.equals("")==false)
+				query+=" and NgayDatVe <= "+"'"+nd+"'";
+			if(gt.equals("")==false && gd.equals("")==false) 
+				query+=" and ThanhTien BETWEEN "+gt+" and "+gd;
+			else if(gt.equals("")==false && gd.equals("")!=false) 
+				query+=" and ThanhTien >="+gt;
+			else if(gt.equals("")!=false && gd.equals("")==false) 
+				query+=" and ThanhTien <="+gd;	
+					
+			hoadon.executeQuery(query);
+			int i=0;
+			
+			while(hoadon.getResult().next()==true)
+			{
+				a.add(String.valueOf(hoadon.getResult().getInt(1)));
+				a.add(String.valueOf(hoadon.getResult().getInt(2)));
+			}
+		}
+		catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(null,"Lỗi tìm thống kê DAO.");
+		}
+		hoadon.close();
+		return a;
+	}
+	
+	public Vector thongketheoquy(String qt,String qd)
+	{
+		Vector a=new Vector();
+		try
+		{
+			String query="select sum(SoLuong) as 'SL',sum(ThanhTien) as 'TT' from hoadon where ";
+			if(qt.equals("")==false && qd.equals("")==false)
+				query+=" NgayDatVe BETWEEN '"+qt+"' and '"+qd+"'";
+			hoadon.executeQuery(query);
+			while(hoadon.getResult().next()==true)
+			{
+				
+				a.add(String.valueOf(hoadon.getResult().getInt(1)));
+				a.add(String.valueOf(hoadon.getResult().getInt(2)));
+			}
+					
+		}
+		catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(null,"Lỗi thống kê theo quy DAO.");
+		}
+		hoadon.close();
+		return a;
 	}
 }

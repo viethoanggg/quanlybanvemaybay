@@ -4,6 +4,7 @@ import DTO.*;
 import FRM.*;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import DAO.HoaDonDAO;
 import DTO.HoaDonDTO;
@@ -44,11 +45,30 @@ public class HoaDonBUS {
 		HoaDonDAO data=new HoaDonDAO();
 		dshd=data.timKiem(ma, dulieu);
 	}
-	public void timKiemNangCao(String maKH,String maNV,String nt,String nd,String gt,String gd)
+	public void timKiemNangCao(String nt,String nd,String gt,String gd)
 	{
 		dshd=new ArrayList<HoaDonDTO>();
 		HoaDonDAO data=new HoaDonDAO();
-		dshd=data.timKiemNangCao(maKH,maNV,nt,nd,gt,gd);
+		dshd=data.timKiemNangCao(nt,nd,gt,gd);
 	}
-	
+	public void timkiemtheoquy(String qt,String qd)
+	{
+		dshd=new ArrayList<HoaDonDTO>();
+		HoaDonDAO data=new HoaDonDAO();
+		dshd=data.timkiemtheoquy(qt,qd);
+	}
+	public Vector thongKeHD(String nt,String nd,String gt,String gd)
+	{
+		Vector a= new Vector();
+		HoaDonDAO data=new HoaDonDAO();
+		a=data.thongKeHD(nt,nd,gt,gd);
+		return a;
+	}
+	public Vector thongketheoquy(String qt,String qd)
+	{
+		Vector a=new Vector();
+		HoaDonDAO data=new HoaDonDAO();
+		a=data.thongketheoquy(qt,qd);
+		return a;
+	}
 }

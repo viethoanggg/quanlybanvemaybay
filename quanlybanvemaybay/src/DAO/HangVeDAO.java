@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import BUS.MySQLConnect;
 import DTO.HangVeDTO;
 
 public class HangVeDAO {
@@ -69,7 +68,7 @@ public class HangVeDAO {
 		{
 			String query="select * from hangve where ";
 			query=query+"MaHangVe like '%"+s+"%'";
-			query=query+"OR TenHangVe LIKE '%"+s+"%'";
+			query=query+" OR TenHangVe LIKE '%"+s+"%'";
 			hangve.executeQuery(query);
 			
 			while(hangve.getResult().next()==true)

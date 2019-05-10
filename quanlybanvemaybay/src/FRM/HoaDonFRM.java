@@ -2,9 +2,6 @@ package FRM;
 import BUS.*;
 import DAO.*;
 import DTO.*;
-import DAO.*;
-import DTO.*;
-import BUS.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -28,11 +25,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import BUS.ChiTietHDBUS;
-import BUS.HoaDonBUS;
-import DTO.ChiTietHDDTO;
-import DTO.HoaDonDTO;
-
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
@@ -48,6 +40,24 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+ 
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 public class HoaDonFRM extends JFrame {
 	
 	
@@ -72,7 +82,7 @@ public class HoaDonFRM extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -85,7 +95,7 @@ public class HoaDonFRM extends JFrame {
 				}
 			}
 		});
-	}*/
+	}
 	public void setTable() 
 	{
 		HoaDonBUS bus=new HoaDonBUS();
@@ -98,17 +108,17 @@ public class HoaDonFRM extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JPanel HoaDonFRM() {
+	public HoaDonFRM() {
 		setAutoRequestFocus(false);
 		setTable();
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setBounds(100, 100, 683, 653);
-		//setLocationRelativeTo(null);
-		//setTitle("Quản lý hóa đơn.");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 683, 653);
+		setLocationRelativeTo(null);
+		setTitle("Quản lý hóa đơn.");
 		HoaDon = new JPanel();
 		HoaDon.setBackground(new Color(255, 255, 255));
 		HoaDon.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		//setContentPane(HoaDon);
+		setContentPane(HoaDon);
 		HoaDon.setLayout(null);
 		
 		JLabel lblHoaDon = new JLabel("DANH SÁCH HÓA ĐƠN");
@@ -256,6 +266,11 @@ public class HoaDonFRM extends JFrame {
 		btnCapNhatDSHD.setBounds(235, 11, 164, 34);
 		panel.add(btnCapNhatDSHD);
 		btnCapNhatDSHD.setBackground(Color.WHITE);
+		
+		JButton btnReport = new JButton("Report");
+		
+		btnReport.setBounds(576, 17, 89, 23);
+		panel.add(btnReport);
 		btnCapNhatDSHD.addActionListener(new ActionListener()
 		{
 			@Override
@@ -397,7 +412,78 @@ public class HoaDonFRM extends JFrame {
 			}
 		});
 		
-		return HoaDon;
+		btnReport.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+					
+				String MaHD=txtMaHD_HD.getText();
+				int SL=0;
+				int TT=0;
+				String MaKH=null;
+				String NDV=null;
+				String tenKH=null;
+				
+				try {
+					//PropertyConfigurator.configure("log4j.properties");
+					JasperReport jasperReport = JasperCompileManager.compileReport("HoaDon.jrxml");
+			       // Tham số truyền vào báo cáo.
+			       Map<String, Object> parameters = new HashMap<String, Object>();
+			 
+			       ChiTietHDBUS ctbus = new ChiTietHDBUS();
+			       ctbus.docDSCTHD();
+			       HoaDonBUS hdbus=new HoaDonBUS();
+			       hdbus.docDSHD();
+			       KhachHangBUS khbus=new KhachHangBUS();
+			       khbus.docDSKH();
+			       
+			       
+			       parameters.put("MaHD",MaHD);
+			       for(HoaDonDTO hd : HoaDonBUS.dshd)
+			       {
+			    	   if(MaHD.equals(hd.getMaHD()))
+			    	   {
+			    		   SL=hd.getSoLuongVe();
+			    		   TT=hd.getThanhTien();
+			    		   MaKH=hd.getMaKH();
+			    		   NDV=hd.getNgayDatVe();
+			    	   }
+			       }
+			       
+			      /* for(KhachHangDTO kh : KhachHangBUS.dskh)
+			       {
+			    	   if(MaKH.equals(kh.getMaKH()))
+			    	   {
+			    		   tenKH=kh.getTenKH();
+			    	   }
+			       }*/
+			       //parameters.put("SoLuong",SL);
+			       //parameters.put("ThanhTien",TT);
+			       parameters.put("NgayDatVe",NDV);
+			       parameters.put("NguoiMua",tenKH);
+			       // DataSource
+			       // Đây là báo cáo đơn giản, không kết nối vào DB
+			       // vì vậy không cần nguồn dữ liệu.
+			       JRDataSource dataSource = new JREmptyDataSource();
+			      MySQLConnect c= new MySQLConnect();
+			       JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,dataSource);	 
+			       // Đảm bảo thư mục đầu ra tồn tại.
+			      /* File outDir = new File("report");
+			       outDir.mkdirs();*/
+			       JasperViewer.viewReport(jasperPrint,false);
+			       // Chạy báo cáo và export ra file PDF.
+			       JasperExportManager.exportReportToPdfFile(jasperPrint,
+			               "report/HoaDon.pdf");
+			 
+			       System.out.println("Done!");
+			       
+				} catch (JRException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		//return HoaDon;
 	}
 	
 	

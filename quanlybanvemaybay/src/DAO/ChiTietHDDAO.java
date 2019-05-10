@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import BUS.MySQLConnect;
 import DTO.ChiTietHDDTO;
 
 public class ChiTietHDDAO {

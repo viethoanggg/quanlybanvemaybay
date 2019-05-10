@@ -37,6 +37,8 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ChiTietHDFRM extends JFrame {
 
@@ -51,15 +53,14 @@ public class ChiTietHDFRM extends JFrame {
 	private JTextField txtTenHangVe;
 	private JTextField txtTenChang;
 	private JTextField txtGiaVe;
-	private JTextField txtMaHD_Sua;
-	private JTextField txtMaVe_Sua;
-	private JTextField txtMaKHD_Sua;
 	private JTable tblCTHD=new JTable();
 	private DefaultTableModel model =new DefaultTableModel();
 	private JTextField txtTimKiem;
 	private JTextField txtTKNC_GiaTu;
 	private JTextField txtTKNC_GiaDen;
 	private JLabel lblSoLuongVeCu;
+	
+	public static int sovedat=0;
 	/**
 	 * Launch the application.
 	 */
@@ -92,6 +93,11 @@ public class ChiTietHDFRM extends JFrame {
 		setAutoRequestFocus(false);
 		setTitle("Chi Tiết hóa đơn");
 		
+		HoaDonBUS hdbus=new HoaDonBUS();
+		hdbus.docDSHD();
+		KhachHangBUS khbus=new KhachHangBUS();
+		khbus.docDSKH();
+		sovedat=0;
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 545, 586);
 		contentPane = new JPanel();
@@ -117,6 +123,7 @@ public class ChiTietHDFRM extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 21, 505, 166);
+		scrollPane.setBackground(Color.WHITE);
 		panel_2.add(scrollPane);
 		
 		tblCTHD = new JTable();
@@ -251,7 +258,7 @@ public class ChiTietHDFRM extends JFrame {
 		
 		
 		JPanel panelThemCTHD = new JPanel();
-		panelThemCTHD.setBackground(new Color(224, 255, 255));
+		panelThemCTHD.setBackground(new Color(245, 255, 250));
 		tab.addTab("Thêm", null, panelThemCTHD, null);
 		panelThemCTHD.setLayout(null);
 		
@@ -266,7 +273,7 @@ public class ChiTietHDFRM extends JFrame {
 		txtMaHD_Them.setColumns(10);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(224, 255, 255));
+		panel.setBackground(new Color(245, 255, 250));
 		panel.setBorder(new TitledBorder(null, "Th\u00EAm KHD", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 83, 515, 153);
 		panelThemCTHD.add(panel);
@@ -277,14 +284,10 @@ public class ChiTietHDFRM extends JFrame {
 		panel.add(lblMKhd);
 		
 		txtMaKHD = new JTextField();
-		txtMaKHD.setBounds(119, 27, 185, 29);
+		
+		txtMaKHD.setBounds(175, 27, 117, 29);
 		panel.add(txtMaKHD);
 		txtMaKHD.setColumns(10);
-		
-		JComboBox cbbMaKHD = new JComboBox();
-		cbbMaKHD.setModel(new DefaultComboBoxModel(new String[] {"Chọn mã KHD"}));
-		cbbMaKHD.setBounds(314, 27, 120, 29);
-		panel.add(cbbMaKHD);
 		
 		JLabel lblTnKhd = new JLabel("Tên KHD");
 		lblTnKhd.setBounds(30, 70, 76, 29);
@@ -306,16 +309,22 @@ public class ChiTietHDFRM extends JFrame {
 		txtVISA.setBounds(119, 113, 185, 29);
 		panel.add(txtVISA);
 		
-		JButton btnThemKHDMoi = new JButton("...");
-		btnThemKHDMoi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnThemKHDMoi.setBounds(458, 41, 34, 12);
+		JButton btnThemKHDMoi = new JButton("Thêm KH Mới");
+		
+		btnThemKHDMoi.setBounds(393, 27, 112, 29);
 		panel.add(btnThemKHDMoi);
 		
+		JLabel lblKhd = new JLabel("KHD_");
+		lblKhd.setBounds(119, 27, 46, 29);
+		panel.add(lblKhd);
+		
+		JLabel label_6 = new JLabel("(Nhập số)");
+		label_6.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		label_6.setBounds(293, 27, 90, 27);
+		panel.add(label_6);
+		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(224, 255, 255));
+		panel_1.setBackground(new Color(245, 255, 250));
 		panel_1.setBorder(new TitledBorder(null, "Th\u00EAm v\u00E9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(10, 259, 515, 207);
 		panelThemCTHD.add(panel_1);
@@ -391,85 +400,7 @@ public class ChiTietHDFRM extends JFrame {
 		btnThoat_Them.setBounds(399, 477, 89, 34);
 		panelThemCTHD.add(btnThoat_Them);
 		
-		
-		JPanel panelSuaCTHD = new JPanel();
-		panelSuaCTHD.setBackground(new Color(224, 255, 255));
-		tab.addTab("Sửa", null, panelSuaCTHD, null);
-		panelSuaCTHD.setLayout(null);
-		
-		JRadioButton rbtnVe = new JRadioButton("Sửa thông tin vé");
-
-		rbtnVe.setBounds(20, 70, 149, 23);
-		panelSuaCTHD.add(rbtnVe);
-		
-		JRadioButton rbtnKHD = new JRadioButton("Sửa thông tin khách hàng đi");
-
-		rbtnKHD.setBounds(20, 162, 181, 23);
-		panelSuaCTHD.add(rbtnKHD);
-		
 		ButtonGroup g=new ButtonGroup();
-		g.add(rbtnVe);
-		g.add(rbtnKHD);
-		
-		JLabel lblMH_1 = new JLabel("Mã HĐ");
-		lblMH_1.setBounds(28, 11, 77, 29);
-		panelSuaCTHD.add(lblMH_1);
-		
-		txtMaHD_Sua = new JTextField();
-		txtMaHD_Sua.setEditable(false);
-		txtMaHD_Sua.setBounds(130, 9, 185, 32);
-		panelSuaCTHD.add(txtMaHD_Sua);
-		txtMaHD_Sua.setColumns(10);
-		
-		JLabel lblMaVe_Sua = new JLabel("Mã vé");
-		lblMaVe_Sua.setBounds(41, 100, 76, 29);
-		panelSuaCTHD.add(lblMaVe_Sua);
-		
-		txtMaVe_Sua = new JTextField();
-		txtMaVe_Sua.setEditable(false);
-		txtMaVe_Sua.setColumns(10);
-		txtMaVe_Sua.setBounds(130, 100, 185, 29);
-		panelSuaCTHD.add(txtMaVe_Sua);
-		
-		JComboBox cbbMaVe_Sua = new JComboBox();
-		cbbMaVe_Sua.setModel(new DefaultComboBoxModel(new String[] {"Chọn mã vé"}));
-		cbbMaVe_Sua.setEnabled(false);
-		cbbMaVe_Sua.setBounds(325, 100, 120, 29);
-		panelSuaCTHD.add(cbbMaVe_Sua);
-		
-		JButton btnSuaTheoMaVe = new JButton("Sửa");
-		btnSuaTheoMaVe.setEnabled(false);
-		btnSuaTheoMaVe.setBounds(455, 100, 60, 26);
-		panelSuaCTHD.add(btnSuaTheoMaVe);
-		
-		JLabel label_1 = new JLabel("Mã KHD");
-		label_1.setBounds(41, 192, 76, 29);
-		panelSuaCTHD.add(label_1);
-		
-		txtMaKHD_Sua = new JTextField();
-		txtMaKHD_Sua.setEditable(false);
-		txtMaKHD_Sua.setColumns(10);
-		txtMaKHD_Sua.setBounds(130, 192, 185, 29);
-		panelSuaCTHD.add(txtMaKHD_Sua);
-		
-		JComboBox cbbMaKHD_Sua = new JComboBox();
-		cbbMaKHD_Sua.setModel(new DefaultComboBoxModel(new String[] {"Chọn mã KHD"}));
-		cbbMaKHD_Sua.setEnabled(false);
-		cbbMaKHD_Sua.setBounds(325, 192, 120, 29);
-		panelSuaCTHD.add(cbbMaKHD_Sua);
-		
-		JButton btnSuaTheoMaKHD = new JButton("Sửa");
-		btnSuaTheoMaKHD.setEnabled(false);
-		btnSuaTheoMaKHD.setBounds(455, 192, 60, 29);
-		panelSuaCTHD.add(btnSuaTheoMaKHD);
-		
-		JButton btnDatLai_Sua = new JButton("Đặt lại");
-		btnDatLai_Sua.setBounds(130, 282, 89, 34);
-		panelSuaCTHD.add(btnDatLai_Sua);
-		
-		JButton btnThoat_Sua = new JButton("Thoát");
-		btnThoat_Sua.setBounds(265, 282, 89, 34);
-		panelSuaCTHD.add(btnThoat_Sua);
 
 		setTable();
 		setVisible(true);
@@ -513,22 +444,7 @@ btnXoa_DSCTHD.addActionListener(new ActionListener() {
 	}
 });
 
-btnSua_DSCTHD.addActionListener(new ActionListener() {
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		int i=tblCTHD.getSelectedRow();
-		if(i>=0) 
-		{
-			String mahd=tblCTHD.getModel().getValueAt(i,0).toString();
-			String mave=tblCTHD.getModel().getValueAt(i,1).toString();
-			String makh="";
-			sua(mahd,mave,makh);
-			tab.setEnabledAt(0,true);
-		}
-		else JOptionPane.showMessageDialog(null,"Vui lòng chọn chi tiết hóa đơn cần sửa.");
-	}
-});
+
 
 btnThem_DSCTHD.addActionListener(new ActionListener() {
 	@Override
@@ -552,36 +468,6 @@ btnThem_DSCTHD.addActionListener(new ActionListener() {
 		else JOptionPane.showMessageDialog(null,"Vui lòng chọn hóa đơn cần thêm.");
 	}
 });
-		rbtnVe.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if(rbtnVe.isSelected()==true)
-				{
-					txtMaVe_Sua.setEditable(true);
-					cbbMaVe_Sua.setEnabled(true);
-					btnSuaTheoMaVe.setEnabled(true);
-					
-					txtMaKHD_Sua.setEditable(false);
-					cbbMaKHD_Sua.setEnabled(false);
-					btnSuaTheoMaKHD.setEnabled(false);
-				}
-			}
-		});
-		rbtnKHD.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if(rbtnKHD.isSelected()==true)
-				{
-					txtMaVe_Sua.setEditable(false);
-					cbbMaVe_Sua.setEnabled(false);
-					btnSuaTheoMaVe.setEnabled(false);
-					
-					txtMaKHD_Sua.setEditable(true);
-					cbbMaKHD_Sua.setEnabled(true);
-					btnSuaTheoMaKHD.setEnabled(true);
-				}
-			}
-		});
 		
 		tblCTHD.addMouseListener(new MouseAdapter()
 		{
@@ -650,6 +536,33 @@ btnThem_DSCTHD.addActionListener(new ActionListener() {
 			}
 			
 		});
+		
+		txtMaKHD.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				String makh="KHD_"+txtMaKHD.getText();
+				
+				for(KhachHangDTO kh :KhachHangBUS.dskh)
+				{
+					if(makh.equals(kh.getMaKH()))
+					{
+						txtTenKHD.setText(kh.getTenKH());
+						txtVISA.setText(kh.getVisa());
+						break;
+					}
+					else
+					{
+						txtTenKHD.setText("");
+						txtVISA.setText("");
+					}	
+				}
+			}
+		});
+		btnThemKHDMoi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				themKHD();
+			}
+		});
 	}
 	
 	public void newTableCTHD()
@@ -691,28 +604,29 @@ btnThem_DSCTHD.addActionListener(new ActionListener() {
 	{
 		tab.setSelectedIndex(1);
 		tab.setEnabledAt(1, true);
-		tab.setEnabledAt(2,false);
 		tab.setEnabledAt(0,false);
 		txtMaHD_Them.setText(MaHD);
 		txtSoLuongVe.setText(String.valueOf(soluongve));
 		lblSoLuongVeCu.setText(String.valueOf(soluongve));
 	}
-	public void sua(String MaHD,String maVe,String maKH)
-	{
-		tab.setSelectedIndex(2);
-		tab.setEnabledAt(2, true);
-		tab.setEnabledAt(1,false);
-		tab.setEnabledAt(0,false);
-		txtMaHD_Sua.setText(MaHD);
-		txtMaVe_Sua.setText(maVe);
-		txtMaKHD_Sua.setText(maKH);
-	}
+	
 	public void xemToanBoDSCTHD()
 	{
 		tab.setSelectedIndex(0);
 		tab.setEnabledAt(0, true);
 		tab.setEnabledAt(1,false);
-		tab.setEnabledAt(2,false);
 
+	}
+	
+	public void themKHD()
+	{
+		
+		JFrame mainFrame =new JFrame();
+		
+		
+		//mainFrame.getContentPane().add(panel);
+		mainFrame.setVisible(true);
+		//int k=JOptionPane.showConfirmDialog(panel,"nhap", "gg",JOptionPane.OK_CANCEL_OPTION );
+		//System.out.print(k);
 	}
 }
