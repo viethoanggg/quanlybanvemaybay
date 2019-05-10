@@ -49,6 +49,7 @@ public class ThemVe extends JFrame {
 	DefaultTableModel model=new DefaultTableModel();
 	private JTextField txtMG;
 	private JTextField txtMaChuyenBay;
+	private JTextField txtHang;
 	
 	/**
 	 * Launch the application.
@@ -71,8 +72,6 @@ public class ThemVe extends JFrame {
 	 */
 	public ThemVe() {
 		
-		HoaDonBUS hdbus=new HoaDonBUS();
-		hdbus.docDSHD();
 		KhachHangBUS khbus=new KhachHangBUS();
 		khbus.docDSKH();
 		VeMayBayBUS vbus=new VeMayBayBUS();
@@ -81,9 +80,15 @@ public class ThemVe extends JFrame {
 		cbbus.docDSChuyenBay();
 		MayBayBUS mbbus=new MayBayBUS();
 		mbbus.docDSMayBay();
+		ChangBUS cbus=new ChangBUS();
+		cbus.docDSChang();
+		GheBUS gbus=new GheBUS();
+		gbus.docDSGhe();		
+		HangVeBUS hvbus=new HangVeBUS();
+		hvbus.docDSHangVe();
 		
 		setAutoRequestFocus(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 902, 537);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -160,6 +165,7 @@ public class ThemVe extends JFrame {
 		contentPane.add(btnThem);
 		
 		JButton btnThoat = new JButton("Thoát");
+		
 		btnThoat.setBounds(492, 453, 89, 30);
 		contentPane.add(btnThoat);
 		
@@ -201,7 +207,7 @@ public class ThemVe extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"MaChuyenBay", "MaMayBay", "TenChangBay", "NgayDi", "NgayDen", "ThoiGianDI", "ThoiGianDen", "SoGheTrong"
+				"MaChuyenBay", "MaMayBay", "H\u00E3ng", "TenChangBay", "NgayDi", "NgayDen", "ThoiGianDI", "ThoiGianDen", "SoGheTrong"
 			}
 		));
 		scrollPane.setViewportView(tblChuyenBay);
@@ -220,7 +226,7 @@ public class ThemVe extends JFrame {
 		label_8.setBounds(739, 391, 61, 27);
 		contentPane.add(label_8);
 		
-		txtMaGhe = new JTextField("E");
+		txtMaGhe = new JTextField("EC");
 		txtMaGhe.setEditable(false);
 		txtMaGhe.setColumns(10);
 		txtMaGhe.setBounds(637, 390, 46, 29);
@@ -241,7 +247,7 @@ public class ThemVe extends JFrame {
 		contentPane.add(lblGimGi);
 		
 		JComboBox cbbGiamGia = new JComboBox();
-		cbbGiamGia.setModel(new DefaultComboBoxModel(new String[] {"0.0", "10.0", "20.0", "50.0"}));
+		cbbGiamGia.setModel(new DefaultComboBoxModel(new String[] {"0", "10", "20", "50"}));
 		cbbGiamGia.setBounds(125, 389, 74, 30);
 		contentPane.add(cbbGiamGia);
 		
@@ -253,15 +259,34 @@ public class ThemVe extends JFrame {
 		txtMG.setColumns(10);
 		
 		JLabel lblMChuynBay = new JLabel("Mã chuyến bay");
-		lblMChuynBay.setBounds(30, 332, 108, 30);
+		lblMChuynBay.setBounds(30, 332, 89, 30);
 		contentPane.add(lblMChuynBay);
 		
 		txtMaChuyenBay = new JTextField();
-		txtMaChuyenBay.setBounds(125, 332, 216, 34);
+		txtMaChuyenBay.setBounds(125, 332, 108, 34);
 		contentPane.add(txtMaChuyenBay);
 		txtMaChuyenBay.setColumns(10);
-//////////////////////////////////////////////////////////////////////////////////////////////////////
 		
+		txtHang = new JTextField();
+		txtHang.setColumns(10);
+		txtHang.setBounds(370, 332, 108, 34);
+		contentPane.add(txtHang);
+		
+		JLabel lblHng = new JLabel("Hãng");
+		lblHng.setBounds(314, 332, 46, 30);
+		contentPane.add(lblHng);
+		
+		JButton btnNewButton = new JButton("New KH");
+		
+		btnNewButton.setBounds(787, 23, 89, 27);
+		contentPane.add(btnNewButton);
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ThemKH themkh=new ThemKH();
+				themkh.setVisible(true);
+			}
+		});
 		cbbMaVe.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
@@ -322,23 +347,23 @@ public class ThemVe extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(cbbHangVe.getSelectedIndex()==0)
 				{
-					txtMaGhe.setText("E");
+					txtMaGhe.setText("EC");
 					
 					
 				}
 				else if(cbbHangVe.getSelectedIndex()==1)
 				{
-					txtMaGhe.setText("B");
+					txtMaGhe.setText("BC");
 					
 				}
 				else if(cbbHangVe.getSelectedIndex()==2)
 				{
-					txtMaGhe.setText("F");
+					txtMaGhe.setText("FC");
 					
 				}
 				else if(cbbHangVe.getSelectedIndex()==3)
 				{
-					txtMaGhe.setText("P");
+					txtMaGhe.setText("PC");
 			
 				}
 			}
@@ -369,7 +394,7 @@ public class ThemVe extends JFrame {
 				
 				for(ChuyenBayDTO cb: ChuyenBayBUS.dsChuyenBay)
 				{
-					if(cb.getTenchang().toLowerCase().indexOf(gadi)!=-1 && cb.getTenchang().toLowerCase().lastIndexOf(gaden)!=-1 )
+					if(cb.getTenchang().toLowerCase().indexOf(gadi)!=-1 && cb.getTenchang().toLowerCase().lastIndexOf(gaden)!=-1 && cb.getSoghetrong()>0)
 					{
 						try {
 							Date ngaybay=f.parse(cb.getNgaydi());
@@ -410,6 +435,7 @@ public class ThemVe extends JFrame {
 				if(i>=0)
 				{
 					txtMaChuyenBay.setText(tblChuyenBay.getModel().getValueAt(i,0).toString());
+					txtHang.setText(tblChuyenBay.getModel().getValueAt(i, 2).toString());
 				}
 			}
 		});
@@ -428,7 +454,11 @@ public class ThemVe extends JFrame {
 						flag=1;
 					}
 				}
-				
+				if(txtMaVe.getText().equals("")==true)
+				{
+					JOptionPane.showMessageDialog(null,"Mã vé bị trống.");
+					flag=1;
+				}
 				//kiem tra kh ton tai trong cdsl
 				String makh="KHD_"+txtMaKHD.getText();
 				for(KhachHangDTO kh: KhachHangBUS.dskh)
@@ -442,7 +472,7 @@ public class ThemVe extends JFrame {
 				}
 				if(flag==2)
 					JOptionPane.showMessageDialog(null,"Mã khách hàng chưa tồn tại trong cơ sở dữ liệu.");
-				if(txtMaChuyenBay.equals(""))
+				if(txtMaChuyenBay.getText().equals("")==true)
 				{
 					JOptionPane.showMessageDialog(null,"Mã chuyến bay bị trống.");
 					flag=1;
@@ -450,6 +480,7 @@ public class ThemVe extends JFrame {
 				
 				//kiem tra ma ghe ton tai trong may bay va da co nguoi dat hay chua
 				String maghe="MG"+txtMaGhe.getText()+txtMaSoGhe.getText();
+				
 				String mamaybay="";
 				int i=tblChuyenBay.getSelectedRow();
 				if(i>=0)	
@@ -478,6 +509,69 @@ public class ThemVe extends JFrame {
 					}
 				if(flag==4)
 					JOptionPane.showMessageDialog(null,"Mã ghế đã có người đặt.");
+				if(txtMaSoGhe.getText().equals("")==true)
+				{
+					JOptionPane.showMessageDialog(null,"Mã ghế bị trống.");
+					flag=1;
+				}
+				
+				//them ve
+				if(flag==0)
+				{
+					VeMayBayDTO vmb =new VeMayBayDTO();
+					vmb.setMaVe(mave);
+					vmb.setMaKH(makh);
+					vmb.setMaCB(txtMaChuyenBay.getText());
+					vmb.setTenHangVe(cbbHangVe.getItemAt(cbbHangVe.getSelectedIndex()).toString());
+					vmb.setVisa(txtVISA.getText());
+					vmb.setMaGhe(maghe);
+					vmb.setHang(txtHang.getText());
+					if(cbbMaVe.getSelectedIndex()==0)
+						vmb.setGiaTriGiam(Integer.valueOf(cbbGiamGia.getItemAt(cbbGiamGia.getSelectedIndex()).toString()));
+					if(cbbMaVe.getSelectedIndex()==1)
+						vmb.setGiaTriGiam(Integer.valueOf("0"));
+					int giachang=0;
+					int giahangve=0;
+					for(ChuyenBayDTO cb : ChuyenBayBUS.dsChuyenBay)
+					{
+						if(vmb.getMaCB().equals(cb.getMachuyenbay()))
+						{
+							String chang=cb.getMachang();
+							for(ChangDTO c:ChangBUS.dsChang)
+							{
+								if(chang.equals(c.getMachang()))
+								{
+									giachang=c.getGia();
+									break;
+								}
+							}
+						}
+					}
+					
+					for(HangVeDTO hv : HangVeBUS.dshv)
+					{
+						if(vmb.getTenHangVe().equals(hv.getTenHangVe()))
+							giahangve=hv.getGiaHangVe();
+					}
+					
+					int giave=giachang+giahangve;
+					
+					if(cbbMaVe.getSelectedIndex()==0)
+						giave=giave-(giave*(Integer.valueOf(cbbGiamGia.getItemAt(cbbGiamGia.getSelectedIndex()).toString()))/100);
+					vmb.setGiaVe(giave);
+					
+					VeMayBayBUS bus=new VeMayBayBUS();
+					bus.them(vmb);
+					cbbus.capnhatSoGheTrong();
+					cbbus.docDSChuyenBay();
+					JOptionPane.showMessageDialog(null,"Đã thêm vé.");
+				}
+			}
+		});
+		btnThoat.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 			}
 		});
 	}

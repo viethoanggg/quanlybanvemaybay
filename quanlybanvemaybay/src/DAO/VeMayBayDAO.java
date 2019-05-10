@@ -40,7 +40,7 @@ public class VeMayBayDAO {
                                 vmb.setTenHangVe(vemaybay.getResult().getString(5));
                                 vmb.setGiaVe(vemaybay.getResult().getInt(6));
                                 vmb.setHang(vemaybay.getResult().getString(7));
-                                vmb.setGiaTriGiam(vemaybay.getResult().getDouble(8));
+                                vmb.setGiaTriGiam(vemaybay.getResult().getInt(8));
                                 vmb.setVisa(vemaybay.getResult().getString(9));
 				
 				dsvmb.add(vmb);
@@ -59,7 +59,7 @@ public class VeMayBayDAO {
 	{
 		try 
 		{
-			String query="INSERT INTO vemaybay (MaVe,MaGhe,MaKH,MaCB,TenHangVe,GiaVe,Hang,MaGiam,GiaTriGiam,Visa) VALUES (";
+			String query="INSERT INTO vemaybay (MaVe,MaGhe,MaKH,MaCB,TenHangVe,GiaVe,Hang,GiaTriGiam,Visa) VALUES (";
 			query=query+"'"+vmb.getMaVe()+"',";
 			query=query+"'"+vmb.getMaGhe()+"',";
 			query=query+"'"+vmb.getMaKH()+"',";
@@ -69,7 +69,6 @@ public class VeMayBayDAO {
                         query=query+"'"+vmb.getHang()+"',";
                         query=query+"'"+vmb.getGiaTriGiam()+"',";
 			query=query+"'"+vmb.getVisa()+"')";
-			
 			vemaybay.executeUpdate(query);
 			
 		}
@@ -133,7 +132,7 @@ public class VeMayBayDAO {
                                 vmb.setTenHangVe(vemaybay.getResult().getString(5));
 				vmb.setGiaVe(vemaybay.getResult().getInt(6));
 				vmb.setHang(vemaybay.getResult().getString(7));
-                                vmb.setGiaTriGiam(vemaybay.getResult().getDouble(8));
+                                vmb.setGiaTriGiam(vemaybay.getResult().getInt(8));
                                 vmb.setVisa(vemaybay.getResult().getString(9));
 				dsvmb.add(vmb);
 			}
@@ -163,7 +162,7 @@ public class VeMayBayDAO {
                                 vmb.setTenHangVe(vemaybay.getResult().getString(5));
 				vmb.setGiaVe(vemaybay.getResult().getInt(6));
 				vmb.setHang(vemaybay.getResult().getString(7));
-                                vmb.setGiaTriGiam(vemaybay.getResult().getDouble(8));
+                                vmb.setGiaTriGiam(vemaybay.getResult().getInt(8));
                                 vmb.setVisa(vemaybay.getResult().getString(9));
 				dsvmb.add(vmb);
 			}

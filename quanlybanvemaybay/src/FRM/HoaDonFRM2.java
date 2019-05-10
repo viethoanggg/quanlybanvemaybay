@@ -67,10 +67,10 @@ public class HoaDonFRM2 extends JFrame {
 		KhachHangBUS khbus=new KhachHangBUS();
 		khbus.docDSKH();
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		//setUndecorated(true);
 		setResizable(false);
-		setBounds(100, 100, 622, 534);
+		setBounds(100, 100, 606, 534);
 		setTitle("Thêm hóa đơn");
 		HoaDon2 = new JPanel();
 		HoaDon2.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,7 +79,7 @@ public class HoaDonFRM2 extends JFrame {
 		
 		JPanel panelThemHD = new JPanel();
 		panelThemHD.setBackground(Color.WHITE);
-		panelThemHD.setBounds(0, 0, 606, 495);
+		panelThemHD.setBounds(0, 0, 604, 534);
 		HoaDon2.add(panelThemHD);
 		panelThemHD.setLayout(null);
 		
@@ -238,7 +238,7 @@ public class HoaDonFRM2 extends JFrame {
 				if(makh.equals("")) flag=1;
 				if(flag==0)
 				{
-					JOptionPane.showMessageDialog(null,"Đã thêm hóa đơn.");
+					JOptionPane.showMessageDialog(null,"Đã thêm hóa đơn.Hãy thêm chi tiết hóa đơn ở nút bên dưới.");
 					btnThemCTHD.setEnabled(true);
 					HoaDonDTO hd=new HoaDonDTO();
 					hd.setMaHD(txtMaHD.getText());
@@ -303,6 +303,7 @@ public class HoaDonFRM2 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ThemKH themkh=new ThemKH();
+				themkh.setVisible(true);
 			}
 		});
 	}

@@ -42,6 +42,7 @@ public class ChuyenBayBUS {
 	}
 	public void capnhatSoGheTrong()
 	{
+		dsChuyenBay=new ArrayList<ChuyenBayDTO>();
 		ChuyenBayDAO data=new ChuyenBayDAO();
 		data.capnhatSoGheTrong();
 	}

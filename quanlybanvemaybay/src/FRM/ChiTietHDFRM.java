@@ -98,7 +98,7 @@ public class ChiTietHDFRM extends JFrame {
 		KhachHangBUS khbus=new KhachHangBUS();
 		khbus.docDSKH();
 		sovedat=0;
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 545, 586);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -335,7 +335,6 @@ public class ChiTietHDFRM extends JFrame {
 		panel_1.add(lblMV);
 		
 		txtMaVe = new JTextField();
-		txtMaVe.setEditable(false);
 		txtMaVe.setColumns(10);
 		txtMaVe.setBounds(118, 33, 185, 29);
 		panel_1.add(txtMaVe);
@@ -361,6 +360,7 @@ public class ChiTietHDFRM extends JFrame {
 		panel_1.add(txtTenChang);
 		
 		JButton btnThemMaVeMoi = new JButton("Thêm vé");
+		
 		btnThemMaVeMoi.setBounds(343, 33, 90, 30);
 		panel_1.add(btnThemMaVeMoi);
 		
@@ -397,6 +397,7 @@ public class ChiTietHDFRM extends JFrame {
 		panelThemCTHD.add(btnDatLai_Them);
 		
 		JButton btnThoat_Them = new JButton("Thoát");
+		
 		btnThoat_Them.setBounds(399, 477, 89, 34);
 		panelThemCTHD.add(btnThoat_Them);
 		
@@ -560,7 +561,21 @@ btnThem_DSCTHD.addActionListener(new ActionListener() {
 		});
 		btnThemKHDMoi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				themKHD();
+				ThemKH themkh=new ThemKH();
+				themkh.setVisible(true);
+			}
+		});
+		btnThemMaVeMoi.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ThemVe themve=new ThemVe();
+				themve.setVisible(true);
+			}
+		});
+		btnThoat_Them.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
 			}
 		});
 	}
@@ -618,15 +633,4 @@ btnThem_DSCTHD.addActionListener(new ActionListener() {
 
 	}
 	
-	public void themKHD()
-	{
-		
-		JFrame mainFrame =new JFrame();
-		
-		
-		//mainFrame.getContentPane().add(panel);
-		mainFrame.setVisible(true);
-		//int k=JOptionPane.showConfirmDialog(panel,"nhap", "gg",JOptionPane.OK_CANCEL_OPTION );
-		//System.out.print(k);
-	}
 }

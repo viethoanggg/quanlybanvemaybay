@@ -151,9 +151,9 @@ public class HoaDonDAO {
 			if(nt.equals("")==false && nd.equals("")==false) 
 				query+=" and NgayDatVe BETWEEN '"+nt+"' and '"+nd+"' ";
 			else if(nt.equals("")==false && nd.equals("")!=false)
-				query+=" and NgayDatVe >= "+"'"+nt+"'";
+				query+=" and NgayDatVe >= '"+nt+"'";
 			else if(nt.equals("")!=false && nd.equals("")==false)
-				query+=" and NgayDatVe <= "+"'"+nd+"'";
+				query+=" and NgayDatVe <= '"+nd+"'";
 			if(gt.equals("")==false && gd.equals("")==false) 
 				query+=" and ThanhTien BETWEEN "+gt+" and "+gd;
 			else if(gt.equals("")==false && gd.equals("")!=false) 

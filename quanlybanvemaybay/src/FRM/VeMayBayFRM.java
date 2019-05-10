@@ -33,6 +33,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
     private File file;
     public VeMayBayFRM() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -43,7 +44,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -67,10 +68,9 @@ public class VeMayBayFRM extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txtVisa = new javax.swing.JTextField();
-        txtHang1 = new javax.swing.JTextField();
+        txtHang = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
         btnThoat = new javax.swing.JButton();
         jrbtnMaVe = new javax.swing.JRadioButton();
         jrbtnMaKH = new javax.swing.JRadioButton();
@@ -168,14 +168,16 @@ public class VeMayBayFRM extends javax.swing.JFrame {
         jLabel12.setText("Visa");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 40, 27));
         jPanel1.add(txtVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 100, 173, 27));
-        jPanel1.add(txtHang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, 173, 27));
+        jPanel1.add(txtHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, 173, 27));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 235, 1320, 147));
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+            	ThemVe themve=new ThemVe();
+            	themve.setVisible(true);
+            	
             }
         });
         getContentPane().add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 414, -1, -1));
@@ -187,14 +189,6 @@ public class VeMayBayFRM extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 414, -1, -1));
-
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 414, -1, -1));
 
         btnThoat.setText("Thoát");
         btnThoat.addActionListener(new java.awt.event.ActionListener() {
@@ -351,9 +345,10 @@ public class VeMayBayFRM extends javax.swing.JFrame {
 					txtMaCB.setText(tblDSVeMayBay.getModel().getValueAt(k,3).toString());
 					txtTenHangVe.setText(tblDSVeMayBay.getModel().getValueAt(k,4).toString());
 					txtGiaVe.setText(tblDSVeMayBay.getModel().getValueAt(k,5).toString());
-					txtGiaTriGiam.setText(tblDSVeMayBay.getModel().getValueAt(k,6).toString());
-                                        txtGiaTriGiam.setText(tblDSVeMayBay.getModel().getValueAt(k,7).toString());
+					txtGiaTriGiam.setText(tblDSVeMayBay.getModel().getValueAt(k,7).toString());
+                   
                                         txtVisa.setText(tblDSVeMayBay.getModel().getValueAt(k,8).toString());
+                    txtHang.setText(tblDSVeMayBay.getModel().getValueAt(k,6).toString());
 				}
         /*boolean a=tblDSVeMayBay.isEditing();
         if(a==false)
@@ -372,7 +367,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
         }
         return true;
     }
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+   /* private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
                                 String mv = txtMaVe.getText();
                                 String gv = txtGiaVe.getText();
                                 int flag=0;
@@ -399,24 +394,24 @@ public class VeMayBayFRM extends javax.swing.JFrame {
                                 {            
                                 JOptionPane.showMessageDialog(null, "Đã thêm dữ liệu !");
                                 VeMayBayDTO vmb=new VeMayBayDTO();
-				vmb.setMaVe(txtMaVe.getText());
-				vmb.setMaGhe(txtMaGhe.getText());
-				vmb.setMaKH(txtMaKH.getText());
-				vmb.setMaCB(txtMaCB.getText());
-                                vmb.setTenHangVe(txtTenHangVe.getText());
-				vmb.setGiaVe(Integer.valueOf(txtGiaVe.getText()));
-				vmb.setHang(txtGiaTriGiam.getText());
-                                vmb.setGiaTriGiam(Double.valueOf(txtGiaTriGiam.getText()));
+								vmb.setMaVe(txtMaVe.getText());
+								vmb.setMaGhe(txtMaGhe.getText());
+								vmb.setMaKH(txtMaKH.getText());
+								vmb.setMaCB(txtMaCB.getText());
+				                                vmb.setTenHangVe(txtTenHangVe.getText());
+								vmb.setGiaVe(Integer.valueOf(txtGiaVe.getText()));
+								vmb.setHang(txtGiaTriGiam.getText());
+                                vmb.setGiaTriGiam(Integer.valueOf(txtGiaTriGiam.getText()));
                                 vmb.setVisa(txtVisa.getText());
 				
                                 Vector row=new Vector();
-				row.add(vmb.getMaVe());
-				row.add(vmb.getMaGhe());
-				row.add(vmb.getMaKH());
-				row.add(vmb.getMaCB());
+								row.add(vmb.getMaVe());
+								row.add(vmb.getMaGhe());
+								row.add(vmb.getMaKH());
+								row.add(vmb.getMaCB());
                                 row.add(vmb.getTenHangVe());
-				row.add(String.valueOf(vmb.getGiaVe()));
-				row.add(vmb.getHang());
+								row.add(String.valueOf(vmb.getGiaVe()));
+								row.add(vmb.getHang());
                                 row.add(String.valueOf(vmb.getGiaTriGiam()));
                                 row.add(vmb.getVisa());
                                 
@@ -425,47 +420,11 @@ public class VeMayBayFRM extends javax.swing.JFrame {
                                 VeMayBayBUS bus = new VeMayBayBUS();
 				bus.them(vmb);
                                 }
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnThemActionPerformed*/
 
     private void txtGiaVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaVeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaVeActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-       int k=JOptionPane.showConfirmDialog(null,"Bạn chắc chắn muốn sửa ?");
-				if(k==0)
-				{
-					int i=tblDSVeMayBay.getSelectedRow();
-					if(i>=0)
-					{
-						JOptionPane.showMessageDialog(null,"Sửa thành công !");
-						VeMayBayDTO vmb=new VeMayBayDTO();
-						vmb.setMaVe(txtMaVe.getText());
-						vmb.setMaGhe(txtMaGhe.getText());
-						vmb.setMaKH(txtMaKH.getText());
-						vmb.setMaCB(txtMaCB.getText());
-                                                vmb.setTenHangVe(txtTenHangVe.getText());
-						vmb.setGiaVe(Integer.valueOf(txtGiaVe.getText()));
-                                                vmb.setHang(txtGiaTriGiam.getText());
-                                                vmb.setGiaTriGiam(Double.valueOf(txtGiaTriGiam.getText()));
-                                                vmb.setVisa(txtVisa.getText());
-						
-						tblDSVeMayBay.getModel().setValueAt(vmb.getMaVe(),i,0);
-						tblDSVeMayBay.getModel().setValueAt(vmb.getMaGhe(),i,1);
-						tblDSVeMayBay.getModel().setValueAt(vmb.getMaKH(),i,2);
-						tblDSVeMayBay.getModel().setValueAt(vmb.getMaCB(),i,3);
-						tblDSVeMayBay.getModel().setValueAt(vmb.getTenHangVe(),i,4);
-						tblDSVeMayBay.getModel().setValueAt(vmb.getGiaVe(),i,5);
-                                                tblDSVeMayBay.getModel().setValueAt(vmb.getHang(),i,6);
-                                                tblDSVeMayBay.getModel().setValueAt(vmb.getGiaTriGiam(),i,7);
-                                                tblDSVeMayBay.getModel().setValueAt(vmb.getVisa(),i,8);
-						
-						VeMayBayBUS bus=new VeMayBayBUS();
-						bus.sua(i,vmb);
-					}
-					else JOptionPane.showMessageDialog(null,"Chọn dòng cần sửa !");	
-				}
-    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
                                 int i=tblDSVeMayBay.getSelectedRow();
@@ -489,7 +448,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
         int k=JOptionPane.showConfirmDialog(null,"Bạn chắc chắn muốn thoát ?");
         if(k==0)
         {
-            System.exit(0);
+           setVisible(false);
         }
     }//GEN-LAST:event_btnThoatActionPerformed
 
@@ -519,35 +478,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Vui lòng chọn ô cần tìm !");
         }
        
-        
-        
-        
-        /* i=cbbTimKiem_HD.getSelectedIndex();
-				if(i==0)
-				{
-					JOptionPane.showMessageDialog(null,"Vui lĂ²ng chá»?n loáº¡i muá»‘n tĂ¬m.");
-				}
-				else if(i==1)
-				{
-					newTableHD();
-					HoaDonBUS bus=new HoaDonBUS();
-					bus.timKiem("MaHD",txtTimKiemHD.getText());
-					newDataModel();
-				}
-				else if(i==2)
-				{
-					newTableHD();
-					HoaDonBUS bus=new HoaDonBUS();
-					bus.timKiem("MaKH",txtTimKiemHD.getText());
-					newDataModel();
-				}
-				else if(i==3)
-				{
-					newTableHD();
-					HoaDonBUS bus=new HoaDonBUS();
-					bus.timKiem("MaNV",txtTimKiemHD.getText());
-					newDataModel();
-				}*/
+       
     }//GEN-LAST:event_btnTimActionPerformed
     public void newTableVMB()
 	{
@@ -631,7 +562,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDatLaiActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-                                VeMayBayBUS bus=new VeMayBayBUS();
+                VeMayBayBUS bus=new VeMayBayBUS();
 				bus.docDSVMB();
 				model =new DefaultTableModel();
 				tblDSVeMayBay.setModel(model);
@@ -701,6 +632,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VeMayBayFRM().setVisible(true);
+                
             }
         });
     }
@@ -709,7 +641,6 @@ public class VeMayBayFRM extends javax.swing.JFrame {
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnDatLai;
     private javax.swing.JButton btnDoc;
-    private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnTim;
@@ -737,7 +668,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
     
     private javax.swing.JTextField txtGiaTriGiam;
     private javax.swing.JTextField txtGiaVe;
-    private javax.swing.JTextField txtHang1;
+    private javax.swing.JTextField txtHang;
     private javax.swing.JTextField txtMaCB;
     private javax.swing.JTextField txtMaGhe;
     private javax.swing.JTextField txtMaKH;

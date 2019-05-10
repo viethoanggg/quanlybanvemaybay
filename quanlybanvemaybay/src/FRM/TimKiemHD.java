@@ -34,14 +34,15 @@ import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
+import com.toedter.calendar.JDateChooser;
 
 public class TimKiemHD extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tblHoaDon;
 	private JTextField txtTimKiemHD=new JTextField("");
-	private JTextField txtTKNC_NgayDatVeTu=new JTextField("");
-	private JTextField txtTKNC_NgayDatVeDen=new JTextField("");
+	private JDateChooser txtTKNC_NgayDatVeTu=new JDateChooser();  
+	private JDateChooser txtTKNC_NgayDatVeDen=new JDateChooser();
 	private JTextField txtTKNC_GiaTu=new JTextField("");
 	private JTextField txtTKNC_GiaDen=new JTextField("");
 	private JTextField txtNamQuy=new JTextField("");
@@ -50,7 +51,7 @@ public class TimKiemHD extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -61,7 +62,7 @@ public class TimKiemHD extends JFrame {
 				}
 			}
 		});
-	}*/
+	}
 
 	/**
 	 * Create the frame.
@@ -74,14 +75,14 @@ public class TimKiemHD extends JFrame {
 		newTableHD();
 		newDataModel();
 	}
-	public JPanel TimKiemHD() {
-		/*setAutoRequestFocus(false);
+	public TimKiemHD() {
+		setAutoRequestFocus(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 665, 585);*/
+		setBounds(100, 100, 665, 585);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
-	//	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-	//	setContentPane(contentPane);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -162,20 +163,18 @@ public class TimKiemHD extends JFrame {
 		lblT.setBounds(10, 22, 35, 28);
 		panel_2.add(lblT);
 		
-		txtTKNC_NgayDatVeTu = new JTextField();
-		txtTKNC_NgayDatVeTu.setBounds(55, 22, 143, 28);
-		panel_2.add(txtTKNC_NgayDatVeTu);
-		txtTKNC_NgayDatVeTu.setColumns(10);
-		
-		txtTKNC_NgayDatVeDen = new JTextField();
-		txtTKNC_NgayDatVeDen.setColumns(10);
-		txtTKNC_NgayDatVeDen.setBounds(278, 22, 144, 28);
-		panel_2.add(txtTKNC_NgayDatVeDen);
-		
 		JLabel lbln = new JLabel("Đến");
 		lbln.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lbln.setBounds(233, 22, 35, 28);
 		panel_2.add(lbln);
+		
+		txtTKNC_NgayDatVeTu= new JDateChooser();
+		txtTKNC_NgayDatVeTu.setBounds(55, 22, 144, 28);
+		panel_2.add(txtTKNC_NgayDatVeTu);
+		
+		txtTKNC_NgayDatVeDen = new JDateChooser();
+		txtTKNC_NgayDatVeDen.setBounds(280, 22, 142, 28);
+		panel_2.add(txtTKNC_NgayDatVeDen);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "S\u1ED1 ti\u1EC1n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -285,25 +284,23 @@ public class TimKiemHD extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					
 					int flag=0;
-					Date ngayDatVeTu = null;
-					Date ngayDatVeDen=null;
-					String a=txtTKNC_NgayDatVeTu.getText();
-					String b=txtTKNC_NgayDatVeDen.getText();
-					if( a.equals("")==false && b.equals("")==false )
-					{
-						try {
-							
-							SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
-							ngayDatVeTu=f.parse(txtTKNC_NgayDatVeTu.getText());
-							ngayDatVeDen=f.parse(txtTKNC_NgayDatVeDen.getText());
+					SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
+					String a="";
+					String b="";
+					
+					try {
+							if(txtTKNC_NgayDatVeTu.getDate()!=null)
+								a=f.format(txtTKNC_NgayDatVeTu.getDate());
+							if(txtTKNC_NgayDatVeDen.getDate()!=null)
+								b=f.format(txtTKNC_NgayDatVeDen.getDate());
 							
 						}
 						catch(Exception ex) {
 							JOptionPane.showMessageDialog(null,"Ngày tháng nhập ko hợp lệ.");
 							flag=1;
 						}
-					}
-					if(flag==0 && ngayDatVeTu!=null && ngayDatVeDen!=null && ngayDatVeTu.compareTo(ngayDatVeDen)>0)
+					
+					if(flag==0 && txtTKNC_NgayDatVeTu.getDate()!=null && txtTKNC_NgayDatVeDen.getDate()!=null && txtTKNC_NgayDatVeTu.getDate().compareTo(txtTKNC_NgayDatVeDen.getDate())>0)
 					{
 						JOptionPane.showMessageDialog(null,"Khoảng ngày nhập không hợp lệ.");
 						flag=1;
@@ -335,13 +332,13 @@ public class TimKiemHD extends JFrame {
 						flag=1;
 					}
 					}
-					if(txtTKNC_NgayDatVeTu.getText().equals("")==true && txtTKNC_NgayDatVeDen.getText().equals("")==true && txtTKNC_GiaTu.getText().equals("")==true && txtTKNC_GiaDen.getText().equals("")==true)
+					if(a.equals("")==true && b.equals("")==true && txtTKNC_GiaTu.getText().equals("")==true && txtTKNC_GiaDen.getText().equals("")==true)
 							flag=1;
 					if(flag==0)
 					{
 						newTableHD();
 						HoaDonBUS bus=new HoaDonBUS();
-						bus.timKiemNangCao(txtTKNC_NgayDatVeTu.getText(),txtTKNC_NgayDatVeDen.getText(),txtTKNC_GiaTu.getText(),txtTKNC_GiaDen.getText());
+						bus.timKiemNangCao(a ,b,txtTKNC_GiaTu.getText(),txtTKNC_GiaDen.getText());
 						newDataModel();
 					}
 				}
@@ -418,7 +415,7 @@ public class TimKiemHD extends JFrame {
 				
 			});
 			
-			return contentPane;
+			//return contentPane;
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public void newTableHD()

@@ -24,9 +24,9 @@ public class GheDAO {
 			while(ghe.getResult().next()==true)
 			{
 				GheDTO g=new GheDTO();
-				g.setMaghe(ghe.getResult().getString(1));
-				g.setMamaybay(ghe.getResult().getString(2));
-				g.setMahangve(ghe.getResult().getString(3));
+				g.setMaghe(ghe.getResult().getString(3));
+				g.setMamaybay(ghe.getResult().getString(1));
+				g.setMahangve(ghe.getResult().getString(2));
 				dsGhe.add(g);
 			}
 		}

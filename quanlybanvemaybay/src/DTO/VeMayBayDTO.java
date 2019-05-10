@@ -20,10 +20,10 @@ public class VeMayBayDTO {
 	public String TenHangVe;
 	public  int GiaVe;
     public  String Hang;
-    public  double GiaTriGiam;
+    public  int GiaTriGiam;
     public  String Visa;
     public VeMayBayDTO(){MaVe="";MaGhe="";MaKH="";MaCB="";TenHangVe="";GiaVe=0;Hang="";GiaTriGiam=0;Visa="";}
-    public VeMayBayDTO(String MaVe,String MaGhe,String MaKH,String MaCB,String TenHangVe,int GiaVe,String Hang,double GiaTriGiam,String Visa)
+    public VeMayBayDTO(String MaVe,String MaGhe,String MaKH,String MaCB,String TenHangVe,int GiaVe,String Hang,int GiaTriGiam,String Visa)
     {
         this.MaVe=MaVe;
         this.MaGhe=MaGhe;
@@ -42,7 +42,7 @@ public class VeMayBayDTO {
     public void setTenHangVe(String TenHangVe){this.TenHangVe=TenHangVe;}
     public void setGiaVe(int GiaVe){this.GiaVe=GiaVe;}
     public void setHang(String Hang){this.Hang=Hang;}
-    public void setGiaTriGiam(double GiaTriGiam){this.GiaTriGiam=GiaTriGiam;}
+    public void setGiaTriGiam(int GiaTriGiam){this.GiaTriGiam=GiaTriGiam;}
     public void setVisa(String Visa){this.Visa=Visa;}
     
     public String getMaVe(){return MaVe;}
@@ -52,7 +52,7 @@ public class VeMayBayDTO {
     public String getTenHangVe(){return TenHangVe;}
     public int getGiaVe(){return GiaVe;}
     public String getHang(){return Hang;}
-    public double getGiaTriGiam(){return GiaTriGiam;}
+    public int getGiaTriGiam(){return GiaTriGiam;}
     public String getVisa(){return Visa;}
    
 }

@@ -26,17 +26,18 @@ import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.LineBorder;
+import com.toedter.calendar.JDateChooser;
 
 public class ThongKeHDFRM extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtTKNC_NgayDatVeTu;
-	private JTextField txtTKNC_NgayDatVeDen;
 	private JTextField txtTKNC_GiaTu;
 	private JTextField txtTKNC_GiaDen;
 	private JTextField txtNamQuy;
 	private JLabel lblSoLuongVe;
 	private JLabel lblTongDoanhThu;
+	private JDateChooser txtTKNC_NgayDatVeTu=new JDateChooser();  
+	private JDateChooser txtTKNC_NgayDatVeDen=new JDateChooser();
 	/**
 	 * Launch the application.
 	 */
@@ -72,14 +73,6 @@ public class ThongKeHDFRM extends JFrame {
 		panel.setBounds(0, 0, 657, 57);
 		contentPane.add(panel);
 		
-		JButton btnXuatFile = new JButton("Xuất file");
-		btnXuatFile.setIcon(new ImageIcon("images/icons8-export-30.png"));
-		btnXuatFile.setHorizontalAlignment(SwingConstants.LEFT);
-		btnXuatFile.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnXuatFile.setBackground(Color.WHITE);
-		btnXuatFile.setBounds(505, 11, 142, 36);
-		panel.add(btnXuatFile);
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Th\u1ED1ng k\u00EA", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBackground(Color.WHITE);
@@ -99,20 +92,18 @@ public class ThongKeHDFRM extends JFrame {
 		label.setBounds(23, 24, 35, 28);
 		panel_2.add(label);
 		
-		txtTKNC_NgayDatVeTu = new JTextField();
-		txtTKNC_NgayDatVeTu.setColumns(10);
-		txtTKNC_NgayDatVeTu.setBounds(68, 25, 143, 28);
-		panel_2.add(txtTKNC_NgayDatVeTu);
-		
-		txtTKNC_NgayDatVeDen = new JTextField();
-		txtTKNC_NgayDatVeDen.setColumns(10);
-		txtTKNC_NgayDatVeDen.setBounds(67, 64, 144, 28);
-		panel_2.add(txtTKNC_NgayDatVeDen);
-		
 		JLabel label_1 = new JLabel("Đến");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		label_1.setBounds(23, 63, 35, 28);
 		panel_2.add(label_1);
+		
+		txtTKNC_NgayDatVeTu = new JDateChooser();
+		txtTKNC_NgayDatVeTu.setBounds(68, 24, 135, 28);
+		panel_2.add(txtTKNC_NgayDatVeTu);
+		
+		txtTKNC_NgayDatVeDen = new JDateChooser();
+		txtTKNC_NgayDatVeDen.setBounds(68, 63, 135, 28);
+		panel_2.add(txtTKNC_NgayDatVeDen);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "S\u1ED1 ti\u1EC1n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -213,28 +204,26 @@ public class ThongKeHDFRM extends JFrame {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		btnTimKiemNangCao_Left.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				
 				int flag=0;
-				Date ngayDatVeTu = null;
-				Date ngayDatVeDen=null;
-				String a=txtTKNC_NgayDatVeTu.getText();
-				String b=txtTKNC_NgayDatVeDen.getText();
-				if( a.equals("")==false && b.equals("")==false )
-				{
-					try {
-						
-						SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
-						ngayDatVeTu=f.parse(txtTKNC_NgayDatVeTu.getText());
-						ngayDatVeDen=f.parse(txtTKNC_NgayDatVeDen.getText());
+				SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
+				String a="";
+				String b="";
+				
+				try {
+						if(txtTKNC_NgayDatVeTu.getDate()!=null)
+							a=f.format(txtTKNC_NgayDatVeTu.getDate());
+						if(txtTKNC_NgayDatVeDen.getDate()!=null)
+							b=f.format(txtTKNC_NgayDatVeDen.getDate());
 						
 					}
 					catch(Exception ex) {
 						JOptionPane.showMessageDialog(null,"Ngày tháng nhập ko hợp lệ.");
 						flag=1;
 					}
-				}
-				if(flag==0 && ngayDatVeTu!=null && ngayDatVeDen!=null && ngayDatVeTu.compareTo(ngayDatVeDen)>0)
+				
+				if(flag==0 && txtTKNC_NgayDatVeTu.getDate()!=null && txtTKNC_NgayDatVeDen.getDate()!=null && txtTKNC_NgayDatVeTu.getDate().compareTo(txtTKNC_NgayDatVeDen.getDate())>0)
 				{
 					JOptionPane.showMessageDialog(null,"Khoảng ngày nhập không hợp lệ.");
 					flag=1;
@@ -266,13 +255,13 @@ public class ThongKeHDFRM extends JFrame {
 					flag=1;
 				}
 				}
-				if(txtTKNC_NgayDatVeTu.getText().equals("")==true && txtTKNC_NgayDatVeDen.getText().equals("")==true && txtTKNC_GiaTu.getText().equals("")==true && txtTKNC_GiaDen.getText().equals("")==true)
+				if(a.equals("")==true && b.equals("")==true && txtTKNC_GiaTu.getText().equals("")==true && txtTKNC_GiaDen.getText().equals("")==true)
 						flag=1;
 				if(flag==0)
 				{
 					HoaDonBUS bus=new HoaDonBUS();
 					Vector c=new Vector();
-					c=bus.thongKeHD(txtTKNC_NgayDatVeTu.getText(),txtTKNC_NgayDatVeDen.getText(),txtTKNC_GiaTu.getText(),txtTKNC_GiaDen.getText());
+					c=bus.thongKeHD(a,b,txtTKNC_GiaTu.getText(),txtTKNC_GiaDen.getText());
 					lblSoLuongVe.setText(c.get(0).toString());
 					lblTongDoanhThu.setText(c.get(1).toString());
 				}

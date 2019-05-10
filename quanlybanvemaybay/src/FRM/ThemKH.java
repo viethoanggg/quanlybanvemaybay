@@ -54,7 +54,7 @@ public class ThemKH extends JFrame {
 	public ThemKH() {
 		KhachHangBUS khbus=new KhachHangBUS();
 		khbus.docDSKH();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 770, 318);
 		setTitle("Thêm khách hàng");
 		contentPane = new JPanel();

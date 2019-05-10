@@ -147,7 +147,9 @@ public class KhachHangFRM extends javax.swing.JFrame {
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+               // btnThemActionPerformed(evt);
+            	ThemKH themkh=new ThemKH();
+            	themkh.setVisible(true);
             }
         });
         getContentPane().add(btnThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
@@ -385,7 +387,7 @@ public class KhachHangFRM extends javax.swing.JFrame {
         }
         return true;
     }
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+   /* private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
                                 String mk = txtMaKH1.getText();
                                 String cmnd = txtCMND.getText();
                                 String sdt = txtSDT.getText();
@@ -444,7 +446,7 @@ public class KhachHangFRM extends javax.swing.JFrame {
                                 KhachHangBUS bus = new KhachHangBUS();
 				bus.them(kh);
                                 }
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnThemActionPerformed*/
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int k=JOptionPane.showConfirmDialog(null,"Bạn chắc chắn muốn sửa ?");
@@ -634,33 +636,7 @@ public class KhachHangFRM extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Vui lòng chọn ô cần tìm !");
         }
 
-        /* i=cbbTimKiem_HD.getSelectedIndex();
-        if(i==0)
-        {
-            JOptionPane.showMessageDialog(null,"Vui lĂ²ng chá»?n loáº¡i muá»‘n tĂ¬m.");
-        }
-        else if(i==1)
-        {
-            newTableHD();
-            HoaDonBUS bus=new HoaDonBUS();
-            bus.timKiem("MaHD",txtTimKiemHD.getText());
-            newDataModel();
-        }
-        else if(i==2)
-        {
-            newTableHD();
-            HoaDonBUS bus=new HoaDonBUS();
-            bus.timKiem("MaKH",txtTimKiemHD.getText());
-            newDataModel();
-        }
-        else if(i==3)
-        {
-            newTableHD();
-            HoaDonBUS bus=new HoaDonBUS();
-            bus.timKiem("MaNV",txtTimKiemHD.getText());
-            newDataModel();
-        }*/
-    }//GEN-LAST:event_btnTimActionPerformed
+            }//GEN-LAST:event_btnTimActionPerformed
 
     private void jrbtnTenKHjrbtnMaVeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrbtnTenKHjrbtnMaVeItemStateChanged
         // TODO add your handling code here:

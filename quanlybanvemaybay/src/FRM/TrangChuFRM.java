@@ -367,10 +367,10 @@ public class TrangChuFRM extends JFrame {
 		btnTimKiemHD.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TimKiemHD tk=new TimKiemHD();
+				/*TimKiemHD tk=new TimKiemHD();
 				JPanel p=tk.TimKiemHD();
 				newPanelContent(350,79, 648, 565,p);
-				p.setBounds(0, 0, 648, 565);
+				p.setBounds(0, 0, 648, 565);*/
 				
 			}
 		});

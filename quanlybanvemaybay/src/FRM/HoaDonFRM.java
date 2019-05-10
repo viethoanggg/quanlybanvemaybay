@@ -60,7 +60,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 public class HoaDonFRM extends JFrame {
 	
-	
 	private JPanel HoaDon;
 	private JTable tblHoaDon = new JTable();
 	private DefaultTableModel model=new DefaultTableModel();
@@ -335,6 +334,7 @@ public class HoaDonFRM extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				HoaDonFRM2 themhd=new HoaDonFRM2();
+				themhd.setVisible(true);
 			}
 		});
 		btnXoa_HD.addActionListener(new ActionListener() {
