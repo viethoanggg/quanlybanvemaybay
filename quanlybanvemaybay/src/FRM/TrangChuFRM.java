@@ -1,5 +1,7 @@
 package FRM;
-
+import BUS.*;
+import DAO.*;
+import DTO.*;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -9,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -51,11 +54,13 @@ public class TrangChuFRM extends JFrame {
 	 * Create the frame.
 	 */
 	public TrangChuFRM() {
+		setUndecorated(true);
 		setAutoRequestFocus(false);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1264, 710);
+		setBounds(100, 100, 1163, 710);
 		setLocationRelativeTo(null);
+		setTitle("Trang chủ");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -82,7 +87,7 @@ public class TrangChuFRM extends JFrame {
 		btnNavBarTimKiem.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNavBarTimKiem.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNavBarTimKiem.setBackground(Color.WHITE);
-		btnNavBarTimKiem.setBounds(292, 11, 126, 46);
+		btnNavBarTimKiem.setBounds(565, 11, 126, 46);
 		panel.add(btnNavBarTimKiem);
 		
 		JButton btnBanVe = new JButton("Bán vé");
@@ -100,7 +105,7 @@ public class TrangChuFRM extends JFrame {
 		btnThongKe.setHorizontalAlignment(SwingConstants.LEFT);
 		btnThongKe.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnThongKe.setBackground(Color.WHITE);
-		btnThongKe.setBounds(428, 11, 126, 46);
+		btnThongKe.setBounds(429, 11, 126, 46);
 		panel.add(btnThongKe);
 		
 		JButton btnQuanLy = new JButton("Quản lý");
@@ -109,14 +114,10 @@ public class TrangChuFRM extends JFrame {
 		btnQuanLy.setHorizontalAlignment(SwingConstants.LEFT);
 		btnQuanLy.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnQuanLy.setBackground(Color.WHITE);
-		btnQuanLy.setBounds(564, 11, 126, 46);
+		btnQuanLy.setBounds(292, 11, 126, 46);
 		panel.add(btnQuanLy);
 		
 		JButton btnNavbarThoat = new JButton("Thoát");
-		btnNavbarThoat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnNavbarThoat.setIcon(new ImageIcon("images/iconExit.png"));
 		btnNavbarThoat.setHorizontalAlignment(SwingConstants.LEFT);
 		btnNavbarThoat.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -140,16 +141,21 @@ public class TrangChuFRM extends JFrame {
 		Date date=new Date(millis);
 		SimpleDateFormat fm=new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String d= fm.format(date);
-		
-		lblTenDangNHap.setText(main.TenNV);
 		lblThoiGianDangNhap.setText(d);
+		lblTenDangNHap.setText(main.TenNV);
+		
+		JButton button = new JButton("-");
+		button.setBackground(Color.WHITE);
+		
+		button.setBounds(1096, 11, 45, 15);
+		panel.add(button);
 		
 ///////////////////---Panel quan ly---- ////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		JPanel panelQuanLy = new JPanel();
 		panelQuanLy.setBorder(new LineBorder(new Color(255, 255, 255), 2));
 		panelQuanLy.setBackground(new Color(255, 255, 255));
-		panelQuanLy.setBounds(20, 79, 261, 259);
+		panelQuanLy.setBounds(20, 79, 261, 423);
 		contentPane.add(panelQuanLy);
 		panelQuanLy.setLayout(null);
 		panelQuanLy.setVisible(false);
@@ -161,6 +167,13 @@ public class TrangChuFRM extends JFrame {
 		panelQuanLy.add(lblQunL);
 		
 		JButton btnQuanLyVMB = new JButton("Vé máy bay");
+		btnQuanLyVMB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VeMayBayFRM v=new  VeMayBayFRM();
+				v.setVisible(true);
+			}
+		});
 		btnQuanLyVMB.setForeground(new Color(255, 255, 255));
 		btnQuanLyVMB.setBackground(new Color(0, 0, 0));
 		btnQuanLyVMB.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -169,25 +182,46 @@ public class TrangChuFRM extends JFrame {
 		btnQuanLyVMB.setBorder(new MatteBorder(0,5,0,0,Color.red));
 		panelQuanLy.add(btnQuanLyVMB);
 		
-		JButton btnKhchHng = new JButton("Khách hàng");
-		btnKhchHng.setHorizontalAlignment(SwingConstants.LEFT);
-		btnKhchHng.setForeground(Color.WHITE);
-		btnKhchHng.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnKhchHng.setBorder(new MatteBorder(0,5,0,0,Color.red));
-		btnKhchHng.setBackground(Color.BLACK);
-		btnKhchHng.setBounds(10, 87, 241, 39);
-		panelQuanLy.add(btnKhchHng);
+		JButton btnKhachHang = new JButton("Khách hàng");
+		btnKhachHang.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				KhachHangFRM kh=new KhachHangFRM();
+				kh.setVisible(true);
+			}
+		});
+		btnKhachHang.setHorizontalAlignment(SwingConstants.LEFT);
+		btnKhachHang.setForeground(Color.WHITE);
+		btnKhachHang.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnKhachHang.setBorder(new MatteBorder(0,5,0,0,Color.red));
+		btnKhachHang.setBackground(Color.BLACK);
+		btnKhachHang.setBounds(10, 87, 241, 39);
+		panelQuanLy.add(btnKhachHang);
 		
-		JButton btnChuynBay = new JButton("Chuyến bay");
-		btnChuynBay.setHorizontalAlignment(SwingConstants.LEFT);
-		btnChuynBay.setForeground(Color.WHITE);
-		btnChuynBay.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnChuynBay.setBorder(new MatteBorder(0,5,0,0,Color.red));
-		btnChuynBay.setBackground(Color.BLACK);
-		btnChuynBay.setBounds(10, 127, 241, 39);
-		panelQuanLy.add(btnChuynBay);
+		JButton btnChuyenBay = new JButton("Chuyến bay");
+		btnChuyenBay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChuyenBayFRM cb=new ChuyenBayFRM();
+				cb.setVisible(true);
+			}
+		});
+		btnChuyenBay.setHorizontalAlignment(SwingConstants.LEFT);
+		btnChuyenBay.setForeground(Color.WHITE);
+		btnChuyenBay.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnChuyenBay.setBorder(new MatteBorder(0,5,0,0,Color.red));
+		btnChuyenBay.setBackground(Color.BLACK);
+		btnChuyenBay.setBounds(10, 127, 241, 39);
+		panelQuanLy.add(btnChuyenBay);
 		
 		JButton btnQuanLyChangBay = new JButton("Chặng bay");
+		btnQuanLyChangBay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChangFRM c=new ChangFRM();
+				c.setVisible(true);
+			}
+		});
 		btnQuanLyChangBay.setHorizontalAlignment(SwingConstants.LEFT);
 		btnQuanLyChangBay.setForeground(Color.WHITE);
 		btnQuanLyChangBay.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -205,6 +239,70 @@ public class TrangChuFRM extends JFrame {
 		btnQuanLyHD.setBackground(Color.BLACK);
 		btnQuanLyHD.setBounds(10, 207, 241, 39);
 		panelQuanLy.add(btnQuanLyHD);
+		
+		JButton btnQuanLyGhe = new JButton("Quản lý ghê");
+		btnQuanLyGhe.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GheFRM g=new GheFRM();
+				g.setVisible(true);
+			}
+		});
+		btnQuanLyGhe.setHorizontalAlignment(SwingConstants.LEFT);
+		btnQuanLyGhe.setForeground(Color.WHITE);
+		btnQuanLyGhe.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnQuanLyGhe.setBorder(new MatteBorder(0,5,0,0,Color.red));
+		btnQuanLyGhe.setBackground(Color.BLACK);
+		btnQuanLyGhe.setBounds(10, 248, 241, 39);
+		panelQuanLy.add(btnQuanLyGhe);
+		
+		JButton btnQuanLyHangVe = new JButton("Hạng vé");
+		btnQuanLyHangVe.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				HangVeFRM hv=new HangVeFRM();
+				hv.setVisible(true);
+			}
+		});
+		btnQuanLyHangVe.setHorizontalAlignment(SwingConstants.LEFT);
+		btnQuanLyHangVe.setForeground(Color.WHITE);
+		btnQuanLyHangVe.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnQuanLyHangVe.setBorder(new MatteBorder(0,5,0,0,Color.red));
+		btnQuanLyHangVe.setBackground(Color.BLACK);
+		btnQuanLyHangVe.setBounds(10, 288, 241, 39);
+		panelQuanLy.add(btnQuanLyHangVe);
+		
+		JButton btnQuanLyMayBay = new JButton("Máy bay");
+		btnQuanLyMayBay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MayBayFRM mb=new MayBayFRM();
+				mb.setVisible(true);
+			}
+		});
+		btnQuanLyMayBay.setHorizontalAlignment(SwingConstants.LEFT);
+		btnQuanLyMayBay.setForeground(Color.WHITE);
+		btnQuanLyMayBay.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnQuanLyMayBay.setBorder(new MatteBorder(0,5,0,0,Color.red));
+		btnQuanLyMayBay.setBackground(Color.BLACK);
+		btnQuanLyMayBay.setBounds(10, 328, 241, 39);
+		panelQuanLy.add(btnQuanLyMayBay);
+		
+		JButton btnQuanLySanBay = new JButton("Sân bay");
+		btnQuanLySanBay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SanBayFRM sb=new SanBayFRM();
+				sb.setVisible(true);
+			}
+		});
+		btnQuanLySanBay.setHorizontalAlignment(SwingConstants.LEFT);
+		btnQuanLySanBay.setForeground(Color.WHITE);
+		btnQuanLySanBay.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnQuanLySanBay.setBorder(new MatteBorder(0,5,0,0,Color.red));
+		btnQuanLySanBay.setBackground(Color.BLACK);
+		btnQuanLySanBay.setBounds(10, 368, 241, 39);
+		panelQuanLy.add(btnQuanLySanBay);
 		
 ///////////////----Panel thong  ke-------/////////////////////////////////////////////////////////////////////////////////
 				JPanel panelThongKe = new JPanel();
@@ -239,6 +337,13 @@ public class TrangChuFRM extends JFrame {
 						panelThongKe.add(btnThongKeChangBay);
 						
 						JButton btnThongKeHD = new JButton("Hóa đơn");
+						btnThongKeHD.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								ThongKeHDFRM tkhd=new ThongKeHDFRM();
+								tkhd.setVisible(true);
+							}
+						});
 						btnThongKeHD.setHorizontalAlignment(SwingConstants.LEFT);
 						btnThongKeHD.setForeground(Color.WHITE);
 						btnThongKeHD.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -287,6 +392,13 @@ public class TrangChuFRM extends JFrame {
 				panelTimKiem.add(btnTimKiemKH);
 				
 				JButton btnTimKiemCB = new JButton("Chuyến bay");
+				btnTimKiemCB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						TimKiemCBFRM tkcb=new TimKiemCBFRM();
+						tkcb.setVisible(true);
+					}
+				});
 				btnTimKiemCB.setHorizontalAlignment(SwingConstants.LEFT);
 				btnTimKiemCB.setForeground(Color.WHITE);
 				btnTimKiemCB.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -337,19 +449,39 @@ public class TrangChuFRM extends JFrame {
 		btnBanVeVMB.setBounds(10, 47, 241, 39);
 		panelBanVe.add(btnBanVeVMB);
 		
+		JLabel lblLogo = new JLabel("QUẢN LÝ BÁN VÉ MÁY BAY");
+		lblLogo.setForeground(Color.RED);
+		lblLogo.setBounds(191, 101, 800, 92);
+		contentPane.add(lblLogo);
+		lblLogo.setFont(new Font("Times New Roman", Font.BOLD, 46));
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogo.setBackground(new Color(0,0,0,0));
+		
 		panelContent = new JPanel();
 		panelContent.setBackground(new Color(255, 255, 255));
 		panelContent.setBounds(350, 79,700, 592);
 		contentPane.add(panelContent);
 		panelContent.setLayout(null);
+		
+		JPanel panelQuyTrinhBanVe = new JPanel();
+		panelQuyTrinhBanVe.setBackground(Color.WHITE);
+		panelQuyTrinhBanVe.setBounds(0, 0, 700, 315);
+		panelContent.add(panelQuyTrinhBanVe);
+		panelQuyTrinhBanVe.setLayout(null);
 		panelContent.setVisible(false);
+		
+		JButton btnDocCSDL = new JButton("Đọc CSDL");
+		
+		btnDocCSDL.setBackground(Color.WHITE);
+		btnDocCSDL.setBounds(1049, 79, 98, 23);
+		contentPane.add(btnDocCSDL);
 		
 		
 		JLabel lblBackGround = new JLabel("");
 		lblBackGround.setIcon(new ImageIcon("images/15-1.jpg"));
 		lblBackGround.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBackGround.setBackground(Color.WHITE);
-		lblBackGround.setBounds(-47, 0, 1345, 721);
+		lblBackGround.setBounds(-47, 0, 1252, 721);
 		
 		contentPane.add(lblBackGround);
 		
@@ -357,8 +489,9 @@ public class TrangChuFRM extends JFrame {
 		btnQuanLyHD.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*HoaDonFRM hd=new HoaDonFRM();
-				JPanel p=hd.HoaDonFRM();
+				HoaDonFRM hd=new HoaDonFRM();
+				hd.setVisible(true);
+				/*JPanel p=hd.HoaDonFRM();
 				newPanelContent(350,79,666,620,p);
 				p.setBounds(0,0,666,620);
 				//p.setBackground(new Color(0,0,0,0));*/
@@ -367,8 +500,9 @@ public class TrangChuFRM extends JFrame {
 		btnTimKiemHD.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*TimKiemHD tk=new TimKiemHD();
-				JPanel p=tk.TimKiemHD();
+				TimKiemHD tk=new TimKiemHD();
+				tk.setVisible(true);
+				/*JPanel p=tk.TimKiemHD();
 				newPanelContent(350,79, 648, 565,p);
 				p.setBounds(0, 0, 648, 565);*/
 				
@@ -377,6 +511,8 @@ public class TrangChuFRM extends JFrame {
 		btnTrangChu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				lblLogo.setVisible(true);
+				btnDocCSDL.setVisible(true);
 				panelTimKiem.setVisible(false);
 				panelThongKe.setVisible(false);
 				panelQuanLy.setVisible(false);
@@ -387,6 +523,8 @@ public class TrangChuFRM extends JFrame {
 		btnBanVe.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				lblLogo.setVisible(false);
+				btnDocCSDL.setVisible(false);
 				panelBanVe.setVisible(true);
 				panelTimKiem.setVisible(false);
 				panelThongKe.setVisible(false);
@@ -398,6 +536,8 @@ public class TrangChuFRM extends JFrame {
 		btnNavBarTimKiem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				lblLogo.setVisible(false);
+				btnDocCSDL.setVisible(false);
 				panelTimKiem.setVisible(true);
 				panelThongKe.setVisible(false);
 				panelQuanLy.setVisible(false);
@@ -408,6 +548,8 @@ public class TrangChuFRM extends JFrame {
 		btnThongKe.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				lblLogo.setVisible(false);
+				btnDocCSDL.setVisible(false);
 				panelThongKe.setVisible(true);
 				panelQuanLy.setVisible(false);
 				panelTimKiem.setVisible(false);
@@ -418,6 +560,8 @@ public class TrangChuFRM extends JFrame {
 		btnQuanLy.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				lblLogo.setVisible(false);
+				btnDocCSDL.setVisible(false);
 				panelQuanLy.setVisible(true);
 				panelThongKe.setVisible(false);
 				panelTimKiem.setVisible(false);
@@ -433,6 +577,38 @@ public class TrangChuFRM extends JFrame {
 				
 			}
 		});
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setExtendedState(ICONIFIED);
+			}
+		});
+		btnDocCSDL.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChangBUS cbus=new ChangBUS();
+				cbus.docDSChang();
+				ChuyenBayBUS cbbus=new ChuyenBayBUS();
+				cbbus.docDSChuyenBay();
+				ChiTietHDBUS ct=new ChiTietHDBUS();
+				ct.docDSCTHD();
+				GheBUS gbus=new GheBUS();
+				gbus.docDSGhe();
+				HangVeBUS hvbus=new HangVeBUS();
+				hvbus.docDSHangVe();
+				HoaDonBUS hdbus=new HoaDonBUS();
+				hdbus.docDSHD();
+				KhachHangBUS khbus=new KhachHangBUS();
+				khbus.docDSKH();
+				MayBayBUS mbbus=new MayBayBUS();
+				mbbus.docDSMayBay();
+				SanBayBUS sbbus=new SanBayBUS();
+				sbbus.docDSSanBay();
+				VeMayBayBUS v=new VeMayBayBUS();
+				v.docDSVMB();
+				JOptionPane.showMessageDialog(null,"Đã đọc danh sách từ CSDL.");
+			}
+		});
 
 	}
 	public void newPanelContent(int x,int y,int width,int height,JPanel p)
@@ -443,4 +619,5 @@ public class TrangChuFRM extends JFrame {
 		panelContent.add(p);
 		panelContent.setVisible(true);
 	}
+	
 }

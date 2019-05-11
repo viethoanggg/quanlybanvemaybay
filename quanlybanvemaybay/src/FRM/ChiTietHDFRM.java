@@ -60,7 +60,8 @@ public class ChiTietHDFRM extends JFrame {
 	private JTextField txtTKNC_GiaDen;
 	private JLabel lblSoLuongVeCu;
 	
-	public static int sovedat=0;
+	public int sovedat=0;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -69,6 +70,7 @@ public class ChiTietHDFRM extends JFrame {
 			public void run() {
 				try {
 					ChiTietHDFRM frame = new ChiTietHDFRM();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -92,14 +94,24 @@ public class ChiTietHDFRM extends JFrame {
 	public ChiTietHDFRM() {
 		setAutoRequestFocus(false);
 		setTitle("Chi Tiết hóa đơn");
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		HoaDonBUS hdbus=new HoaDonBUS();
 		hdbus.docDSHD();
 		KhachHangBUS khbus=new KhachHangBUS();
 		khbus.docDSKH();
+		VeMayBayBUS vmbbus=new VeMayBayBUS();
+		vmbbus.docDSVMB();
+		ChiTietHDBUS ctbus =new ChiTietHDBUS();
+		ctbus.docDSCTHD();
+		ChuyenBayBUS cbbus =new ChuyenBayBUS();
+		cbbus.docDSChuyenBay();
+		
 		sovedat=0;
 		
 		setBounds(100, 100, 545, 586);
+		setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -108,6 +120,7 @@ public class ChiTietHDFRM extends JFrame {
 		tab.setBackground(new Color(255, 255, 255));
 		tab.setBounds(0, 0, 530, 554);
 		contentPane.add(tab);
+		
 		
 		JPanel panelDSCTHD = new JPanel();
 		panelDSCTHD.setBackground(new Color(240, 255, 255));
@@ -239,6 +252,12 @@ public class ChiTietHDFRM extends JFrame {
 		panel_3.add(btnCapNhatDSCTHD);
 		
 		JButton button_5 = new JButton("Thoát");
+		button_5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+			}
+		});
 		button_5.setIcon(new ImageIcon("images/iconExit.png"));
 		button_5.setHorizontalAlignment(SwingConstants.LEFT);
 		button_5.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -285,7 +304,7 @@ public class ChiTietHDFRM extends JFrame {
 		
 		txtMaKHD = new JTextField();
 		
-		txtMaKHD.setBounds(175, 27, 117, 29);
+		txtMaKHD.setBounds(166, 27, 117, 29);
 		panel.add(txtMaKHD);
 		txtMaKHD.setColumns(10);
 		
@@ -309,7 +328,8 @@ public class ChiTietHDFRM extends JFrame {
 		txtVISA.setBounds(119, 113, 185, 29);
 		panel.add(txtVISA);
 		
-		JButton btnThemKHDMoi = new JButton("Thêm KH Mới");
+		JButton btnThemKHDMoi = new JButton("Tạo KH Mới");
+		btnThemKHDMoi.setBackground(Color.WHITE);
 		
 		btnThemKHDMoi.setBounds(393, 27, 112, 29);
 		panel.add(btnThemKHDMoi);
@@ -320,7 +340,7 @@ public class ChiTietHDFRM extends JFrame {
 		
 		JLabel label_6 = new JLabel("(Nhập số)");
 		label_6.setFont(new Font("Tahoma", Font.ITALIC, 10));
-		label_6.setBounds(293, 27, 90, 27);
+		label_6.setBounds(293, 28, 68, 27);
 		panel.add(label_6);
 		
 		JPanel panel_1 = new JPanel();
@@ -335,8 +355,9 @@ public class ChiTietHDFRM extends JFrame {
 		panel_1.add(lblMV);
 		
 		txtMaVe = new JTextField();
+		
 		txtMaVe.setColumns(10);
-		txtMaVe.setBounds(118, 33, 185, 29);
+		txtMaVe.setBounds(201, 33, 90, 29);
 		panel_1.add(txtMaVe);
 		
 		JLabel lblTnHngV = new JLabel("Tên hạng vé");
@@ -360,8 +381,9 @@ public class ChiTietHDFRM extends JFrame {
 		panel_1.add(txtTenChang);
 		
 		JButton btnThemMaVeMoi = new JButton("Thêm vé");
+		btnThemMaVeMoi.setBackground(Color.WHITE);
 		
-		btnThemMaVeMoi.setBounds(343, 33, 90, 30);
+		btnThemMaVeMoi.setBounds(415, 32, 90, 30);
 		panel_1.add(btnThemMaVeMoi);
 		
 		JLabel lblGiV = new JLabel("Giá vé");
@@ -374,35 +396,49 @@ public class ChiTietHDFRM extends JFrame {
 		txtGiaVe.setBounds(118, 159, 185, 29);
 		panel_1.add(txtGiaVe);
 		
+		JComboBox cbbMaVe = new JComboBox();
+		
+		cbbMaVe.setBackground(Color.WHITE);
+		cbbMaVe.setModel(new DefaultComboBoxModel(new String[] {"TN_", "NN_"}));
+		cbbMaVe.setBounds(115, 33, 76, 29);
+		panel_1.add(cbbMaVe);
+		
+		JLabel label_1 = new JLabel("(Nhập số)");
+		label_1.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		label_1.setBounds(294, 33, 68, 27);
+		panel_1.add(label_1);
+		
 		JLabel lblSLngV = new JLabel("Số lượng vé");
 		lblSLngV.setBounds(40, 46, 88, 26);
 		panelThemCTHD.add(lblSLngV);
 		
-		txtSoLuongVe = new JTextField();
+		txtSoLuongVe = new JTextField("0");
 		txtSoLuongVe.setColumns(10);
 		txtSoLuongVe.setBounds(140, 46, 156, 24);
 		panelThemCTHD.add(txtSoLuongVe);
 		
-		lblSoLuongVeCu = new JLabel("");
+		lblSoLuongVeCu = new JLabel("0");
 		lblSoLuongVeCu.setBackground(new Color(224, 255, 255));
-		lblSoLuongVeCu.setBounds(318, 46, 46, 20);
+		lblSoLuongVeCu.setBounds(306, 49, 46, 20);
 		panelThemCTHD.add(lblSoLuongVeCu);
 		
 		JButton btnThemCTHD = new JButton("Thêm");
-		btnThemCTHD.setBounds(130, 477, 89, 34);
+		
+		btnThemCTHD.setBackground(Color.WHITE);
+		btnThemCTHD.setBounds(138, 477, 89, 34);
 		panelThemCTHD.add(btnThemCTHD);
 		
-		JButton btnDatLai_Them = new JButton("Đặt lại");
-		btnDatLai_Them.setBounds(264, 477, 89, 34);
-		panelThemCTHD.add(btnDatLai_Them);
-		
 		JButton btnThoat_Them = new JButton("Thoát");
+		btnThoat_Them.setBackground(Color.WHITE);
 		
-		btnThoat_Them.setBounds(399, 477, 89, 34);
+		btnThoat_Them.setBounds(291, 477, 89, 34);
 		panelThemCTHD.add(btnThoat_Them);
 		
 		ButtonGroup g=new ButtonGroup();
-
+		
+		//tab.setSelectedIndex(0);
+		//tab.setEnabledAt(0, true);
+		//tab.setEnabledAt(1,false);
 		setTable();
 		setVisible(true);
 
@@ -575,7 +611,201 @@ btnThem_DSCTHD.addActionListener(new ActionListener() {
 		btnThoat_Them.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				int flag=0;
+				int tongsove=0;
+				int sovecu=0;
+				String mave=cbbMaVe.getItemAt(cbbMaVe.getSelectedIndex()).toString()+txtMaVe.getText();
+				String makhd="KHD_"+txtMaKHD.getText();
+				try {
+					tongsove=Integer.valueOf(txtSoLuongVe.getText());
+					sovecu=Integer.valueOf(lblSoLuongVeCu.getText());
+				}
+				catch(Exception ex)
+				{
+					flag=1;
+					JOptionPane.showMessageDialog(null,"Bạn phải nhập số vào ô số lượng vé");
+				}
+				if(tongsove>sovecu && (tongsove-sovecu)>sovedat)
+				{
+					flag=1;
+					JOptionPane.showMessageDialog(null,"Bạn thêm chưa đủ số lượng vé.");
+				}
+				if(flag==0)
+					setVisible(false);
+			}
+		});
+		btnThemCTHD.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int flag=0;
+				int tongsove=0;
+				int sovecu=0;
+				String mave=cbbMaVe.getItemAt(cbbMaVe.getSelectedIndex()).toString()+txtMaVe.getText();
+				String makhd="KHD_"+txtMaKHD.getText();
+				try {
+					tongsove=Integer.valueOf(txtSoLuongVe.getText());
+					sovecu=Integer.valueOf(lblSoLuongVeCu.getText());
+				}
+				catch(Exception ex)
+				{
+					flag=1;
+					JOptionPane.showMessageDialog(null,"Bạn phải nhập số vào ô số lượng vé");
+				}
+				if(tongsove<=sovecu || (tongsove-sovecu)<=sovedat)
+				{
+					flag=1;
+					JOptionPane.showMessageDialog(null,"Số lượng vé đã đủ hoặc nhập không hợp lệ.");
+				}
+				
+				if(txtMaKHD.getText().equals("")==true)
+				{
+					flag=1;
+					JOptionPane.showMessageDialog(null,"Mã khách hàng bị trống.");
+				}
+				else
+				{
+					for(KhachHangDTO kh : KhachHangBUS.dskh)
+					{
+						flag=2;
+						if(makhd.equals(kh.getMaKH()))
+						{
+							flag=0;
+							break;
+						}
+					}
+					if(flag==2)
+						JOptionPane.showMessageDialog(null,"Mã khách hàng không tồn tại,hãy thêm khách hàng.");
+				}
+				if(mave.equals("")==true)
+				{
+					flag=1;
+					JOptionPane.showMessageDialog(null,"Mã vé bị trống.");
+				}
+				else
+				{
+					for(VeMayBayDTO v : VeMayBayBUS.dsvmb)
+					{
+						flag=3;
+						if(mave.equals(v.getMaVe()))
+						{
+							if(makhd.equals(v.getMaKH())==false)
+							{
+								flag=1;
+								JOptionPane.showMessageDialog(null,"Vé này đã thuộc về khách hàng khác,hãy chọn lại vé hoặc mã khách hàng.");
+								break;
+							}
+							else
+							{
+								flag=0;
+								break;	
+							}
+						}
+					}
+					if(flag==3)
+						JOptionPane.showMessageDialog(null,"Mã Vé không tồn tại,hãy thêm Vé.");
+				}
+				for(ChiTietHDDTO ct : ChiTietHDBUS.dscthd)
+				{
+					if(mave.equals(ct.getMaVe()))
+					{
+						flag=1;
+						JOptionPane.showMessageDialog(null,"Vé này đã tồn tại trong hóa đơn khác");
+						break;
+					}
+				}
+				if(flag==0)
+				{
+					
+					ChiTietHDDTO ct=new ChiTietHDDTO();
+					ct.setMaHD(txtMaHD_Them.getText());
+					ct.setMaVe(mave);
+					ct.setTenKH(txtTenKHD.getText());
+					if(cbbMaVe.getSelectedIndex()==1)
+						ct.setVISA(txtVISA.getText());
+					else 
+						ct.setVISA("");
+					
+					ct.setGiaVe(Integer.valueOf(txtGiaVe.getText()));
+					ct.setTenChang(txtTenChang.getText());
+					for(HangVeDTO hv : HangVeBUS.dshv)
+					{
+						if(txtTenHangVe.getText().equals(hv.getTenHangVe()))
+						{
+							ct.setMaHangVe(hv.getMaHangVe());
+							break;
+						}
+					}
+					ChiTietHDBUS bus=new ChiTietHDBUS();
+					bus.them(ct);
+					sovedat=sovedat+1;
+					JOptionPane.showMessageDialog(null,"Đã thêm vào chi tiết hóa đơn.");
+					
+				}
+			}
+		});
+		
+		txtMaVe.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				String mave=cbbMaVe.getItemAt(cbbMaVe.getSelectedIndex()).toString()+txtMaVe.getText();
+				
+				for(VeMayBayDTO v: VeMayBayBUS.dsvmb)
+				{
+					if(mave.equals(v.getMaVe()))
+					{
+						txtTenHangVe.setText(v.getTenHangVe());
+						txtGiaVe.setText(String.valueOf(v.getGiaVe()));
+						for(ChuyenBayDTO cb : ChuyenBayBUS.dsChuyenBay)
+						{
+							if(v.getMaCB().equals(cb.getMachuyenbay()))
+							{
+								txtTenChang.setText(cb.getTenchang());
+								break;
+							}
+						}
+						break;
+					}
+					else
+					{
+						txtTenHangVe.setText("");
+						txtGiaVe.setText("");
+						txtTenChang.setText("");
+					}
+					
+				}
+			}
+		});
+		
+		cbbMaVe.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				String mave=cbbMaVe.getItemAt(cbbMaVe.getSelectedIndex()).toString()+txtMaVe.getText();
+				
+				for(VeMayBayDTO v: VeMayBayBUS.dsvmb)
+				{
+					if(mave.equals(v.getMaVe()))
+					{
+						txtTenHangVe.setText(v.getTenHangVe());
+						txtGiaVe.setText(v.getMaVe());
+						for(ChuyenBayDTO cb : ChuyenBayBUS.dsChuyenBay)
+						{
+							if(v.getMaCB().equals(cb.getMachuyenbay()))
+							{
+								txtTenChang.setText(cb.getTenchang());
+								break;
+							}
+						}
+						break;
+					}
+					else
+					{
+						txtTenHangVe.setText("");
+						txtGiaVe.setText("");
+						txtTenChang.setText("");
+					}
+					
+				}
 			}
 		});
 	}
@@ -632,5 +862,4 @@ btnThem_DSCTHD.addActionListener(new ActionListener() {
 		tab.setEnabledAt(1,false);
 
 	}
-	
 }

@@ -102,8 +102,9 @@ public class GheFRM extends JFrame {
 		}  
 		
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Quản lý ghê máy bay.");
 		setBounds(100, 100, 959, 771);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

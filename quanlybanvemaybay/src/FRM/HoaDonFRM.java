@@ -110,7 +110,7 @@ public class HoaDonFRM extends JFrame {
 	public HoaDonFRM() {
 		setAutoRequestFocus(false);
 		setTable();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 683, 653);
 		setLocationRelativeTo(null);
 		setTitle("Quản lý hóa đơn.");

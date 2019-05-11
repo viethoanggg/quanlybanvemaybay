@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Color;
 
 public class ThemKH extends JFrame {
 
@@ -56,6 +57,7 @@ public class ThemKH extends JFrame {
 		khbus.docDSKH();
 		
 		setBounds(100, 100, 770, 318);
+		setLocationRelativeTo(null);
 		setTitle("Thêm khách hàng");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -126,26 +128,31 @@ public class ThemKH extends JFrame {
 		panel.add(txtNgaySinh);
 		
 		JComboBox cbbGioiTinh = new JComboBox();
+		cbbGioiTinh.setBackground(Color.WHITE);
 		cbbGioiTinh.setModel(new DefaultComboBoxModel(new String[] {"Nam", "Nữ"}));
 		cbbGioiTinh.setBounds(427, 68, 161, 30);
 		panel.add(cbbGioiTinh);
 		
 		JButton btnThem = new JButton("Thêm");
+		btnThem.setBackground(Color.WHITE);
 		
 		btnThem.setBounds(183, 216, 89, 30);
 		panel.add(btnThem);
 		
 		JButton btnDatLai = new JButton("Đặt lai");
+		btnDatLai.setBackground(Color.WHITE);
 		
 		btnDatLai.setBounds(308, 216, 89, 30);
 		panel.add(btnDatLai);
 		
 		JButton btnThoat = new JButton("Thoát");
+		btnThoat.setBackground(Color.WHITE);
 		
 		btnThoat.setBounds(431, 216, 89, 30);
 		panel.add(btnThoat);
 		
 		JComboBox cbbMaKH = new JComboBox();
+		cbbMaKH.setBackground(Color.WHITE);
 		cbbMaKH.setModel(new DefaultComboBoxModel(new String[] {"KHM_", "KHD_"}));
 		cbbMaKH.setBounds(111, 27, 74, 30);
 		panel.add(cbbMaKH);

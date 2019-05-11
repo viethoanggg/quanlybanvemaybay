@@ -34,6 +34,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
     public VeMayBayFRM() {
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Quản lý vé máy bay");
     }
 
     /**
@@ -85,7 +86,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
         jrbtnTrongNuoc = new javax.swing.JRadioButton();
         jrbtnNgoaiNuoc = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
         setTitle("Quản Lý Vé Máy Bay");
         setLocation(new java.awt.Point(100, 100));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -346,8 +347,7 @@ public class VeMayBayFRM extends javax.swing.JFrame {
 					txtTenHangVe.setText(tblDSVeMayBay.getModel().getValueAt(k,4).toString());
 					txtGiaVe.setText(tblDSVeMayBay.getModel().getValueAt(k,5).toString());
 					txtGiaTriGiam.setText(tblDSVeMayBay.getModel().getValueAt(k,7).toString());
-                   
-                                        txtVisa.setText(tblDSVeMayBay.getModel().getValueAt(k,8).toString());
+                    txtVisa.setText(tblDSVeMayBay.getModel().getValueAt(k,8).toString());
                     txtHang.setText(tblDSVeMayBay.getModel().getValueAt(k,6).toString());
 				}
         /*boolean a=tblDSVeMayBay.isEditing();

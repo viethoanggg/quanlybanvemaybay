@@ -19,7 +19,7 @@ public class NhanVienDAO {
     private MySQLConnect nhanvien;
     public NhanVienDAO()
 	{
-		nhanvien=new MySQLConnect("localhost","root","","projectdatabase");
+		nhanvien=new MySQLConnect("localhost","root","","quanlybanvemaybay");
 		nhanvien.Connect();
 	}	
 	public ArrayList docDSNhanVien() 
@@ -37,6 +37,7 @@ public class NhanVienDAO {
                                 nv.setChucVu(nhanvien.getResult().getString(3));
                                 nv.setLuong(nhanvien.getResult().getInt(4));
                                 nv.setTenTK(nhanvien.getResult().getString(5));	
+                nv.setMatKhau(nhanvien.getResult().getString(6));
 				dsnv.add(nv);
 			}		
 		}

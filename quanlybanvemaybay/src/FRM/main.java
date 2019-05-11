@@ -22,8 +22,8 @@ import java.awt.Color;
 import java.awt.Toolkit;
 
 public class main extends JFrame {
-	public static String TenNV="Lê Việt Hoàng";
-	public static String MaNV="NV01";
+	public static String TenNV="";
+	public static String MaNV="";
 	private JPanel contentPane;
 	private JTextField txtTenDangNhap;
 	private JPasswordField txtMatKhau;
@@ -48,11 +48,14 @@ public class main extends JFrame {
 	 * Create the frame.
 	 */
 	public main() {
+		NhanVienBUS nv=new NhanVienBUS();
+		nv.docDSNV();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images/iconMayBay.png"));
 		setAutoRequestFocus(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 257);
 		setLocationRelativeTo(null);
+		setTitle("Đăng nhập");
 		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,13 +87,24 @@ public class main extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String tdn=txtTenDangNhap.getText();
 				String mk=txtMatKhau.getText();
-				if(mk.equals("root") && tdn.equals("root"))
+				int flag=0;
+				for(NhanVienDTO nv:NhanVienBUS.dsnv)
 				{
-					TrangChuFRM ct=new TrangChuFRM();
-					ct.setVisible(true);
-					setVisible(false);
+					flag=1;
+					if(tdn.equals(nv.getTenTK()) && mk.equals(nv.getMatKhau()))
+					{
+						flag=0;
+						main.TenNV=nv.getTenNV();
+						main.MaNV=nv.getMaNV();
+						TrangChuFRM tc=new TrangChuFRM();
+						tc.setVisible(true);
+						
+						setVisible(false);
+						break;
+					}
 				}
-				else JOptionPane.showMessageDialog(null,"Tên đăng nhập hoặc mật khẩu không đúng.");
+				if(flag==1)
+				JOptionPane.showMessageDialog(null,"Tên đăng nhập hoặc mật khẩu không đúng.");
 			}
 		});
 		btnDangNhap.setBounds(146, 158, 96, 30);

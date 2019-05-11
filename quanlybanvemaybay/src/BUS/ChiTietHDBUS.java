@@ -50,4 +50,10 @@ public class ChiTietHDBUS {
 		ChiTietHDDAO data=new ChiTietHDDAO();
 		dscthd=data.timKiemNangCao(gt,gd);
 	}
+	public void them(ChiTietHDDTO ct)
+	{
+		dscthd.add(ct);
+		ChiTietHDDAO data=new ChiTietHDDAO();
+		data.them(ct);
+	}
 }

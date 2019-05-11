@@ -22,7 +22,8 @@ public class ChiTietHDDAO {
 		ArrayList<ChiTietHDDTO> dscthd=new ArrayList<ChiTietHDDTO>();
 		try
 		{
-			String query="select * from chitiethd";
+			String query="select ct.MaHD,ct.MaVe,ct.MaHangVe,kh.TenKH,c.TenChang,ct.GiaVe,v.VISA from chitiethd ct,HangVe hv,vemaybay v,chuyenbay cb,chang c,khachhang kh ";
+			query+="where hv.MaHangVe=ct.MaHangVe and ct.MaVe=v.MaVe and v.MaCB=cb.MaChuyenBay and cb.MaChang=c.MaChang and v.MaKH=kh.MaKH ";
 			cthd.executeQuery(query);
 			
 			while(cthd.getResult().next()==true)
@@ -189,5 +190,25 @@ public class ChiTietHDDAO {
 	public void setCthd(MySQLConnect cthd) {
 		this.cthd = cthd;
 	}
-	
+	public void them(ChiTietHDDTO ct)
+	{
+		try
+		{
+			String query="INSERT INTO chitiethd (MaHD,MaVe,MaHangVe,TenKH,TenChang,GiaVe,VISA) VALUES (";
+			query+="'"+ct.getMaHD()+"',";
+			query+="'"+ct.getMaVe()+"',";
+			query+="'"+ct.getMaHangVe()+"',";
+			query+="'"+ct.getTenKH()+"',";
+			query+="'"+ct.getTenChang()+"',";
+			query+=""+ct.getGiaVe()+",";
+			query+="'"+ct.getVISA()+"')";
+			
+			cthd.executeUpdate(query);
+		}
+		catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(null,"Lỗi thêm Database chi tiet hd.");
+		}
+		cthd.close();
+	}
 }

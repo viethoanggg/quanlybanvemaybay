@@ -2,8 +2,8 @@ package BUS;
 import DAO.*;
 import DTO.*;
 import FRM.*;
-
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ChuyenBayBUS {
 	public static ArrayList<ChuyenBayDTO> dsChuyenBay=new ArrayList<ChuyenBayDTO>();
@@ -45,5 +45,17 @@ public class ChuyenBayBUS {
 		dsChuyenBay=new ArrayList<ChuyenBayDTO>();
 		ChuyenBayDAO data=new ChuyenBayDAO();
 		data.capnhatSoGheTrong();
+	}
+	public void timkiemtheongay(String ngaydi,String ngaydiden)
+	{
+		dsChuyenBay=new ArrayList<ChuyenBayDTO>();
+		ChuyenBayDAO data=new ChuyenBayDAO();
+		dsChuyenBay=data.timkiemtheongay(ngaydi,ngaydiden);
+	}
+	public void timkiemtheogio(String thoigianditu,String thoigiandiden)
+	{
+		dsChuyenBay=new ArrayList<ChuyenBayDTO>();
+		ChuyenBayDAO data=new ChuyenBayDAO();
+		data.timkiemtheogio( thoigianditu, thoigiandiden);
 	}
 }

@@ -27,6 +27,8 @@ public class KhachHangFRM extends javax.swing.JFrame {
     //JTable tblDSKhachHang = new JTable();
     public KhachHangFRM() {
         initComponents();
+        setTitle("Quản lý khách hàng.");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -83,7 +85,7 @@ public class KhachHangFRM extends javax.swing.JFrame {
         txtSL = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
         setLocation(new java.awt.Point(100, 100));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -692,6 +694,7 @@ public class KhachHangFRM extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new KhachHangFRM().setVisible(true);
+                
             }
         });
     }

@@ -71,6 +71,7 @@ public class HoaDonFRM2 extends JFrame {
 		//setUndecorated(true);
 		setResizable(false);
 		setBounds(100, 100, 606, 534);
+		setLocationRelativeTo(null);
 		setTitle("Thêm hóa đơn");
 		HoaDon2 = new JPanel();
 		HoaDon2.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -107,6 +108,7 @@ public class HoaDonFRM2 extends JFrame {
 		JLabel lblTenNV = new JLabel("");
 		lblTenNV.setBounds(180, 59, 279, 26);
 		panelThemHD.add(lblTenNV);
+		lblTenNV.setText(main.TenNV);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -116,6 +118,7 @@ public class HoaDonFRM2 extends JFrame {
 		panel.setLayout(null);
 		
 		JRadioButton rbnKHC = new JRadioButton("KH cũ",true);
+		rbnKHC.setBackground(Color.WHITE);
 		rbnKHC.setBounds(18, 29, 71, 23);
 		panel.add(rbnKHC);
 		
@@ -157,19 +160,23 @@ public class HoaDonFRM2 extends JFrame {
 		panelKHC.add(lblnhpS);
 		
 		JButton btnThemKH = new JButton("Thêm KH mới");
+		btnThemKH.setBackground(new Color(245, 245, 220));
 		
 		btnThemKH.setBounds(378, 29, 133, 23);
 		panel.add(btnThemKH);
 		
 		JButton btnThemHD = new JButton(" Thêm HĐ");
+		btnThemHD.setBackground(new Color(245, 245, 220));
 		btnThemHD.setBounds(86, 404, 101, 33);
 		panelThemHD.add(btnThemHD);
 		
 		JButton btnDatLai = new JButton("Đặt lại");
+		btnDatLai.setBackground(new Color(245, 245, 220));
 		btnDatLai.setBounds(240, 404, 89, 33);
 		panelThemHD.add(btnDatLai);
 		
 		JButton btnThoat = new JButton("Thoát");
+		btnThoat.setBackground(new Color(245, 245, 220));
 		btnThoat.setBounds(380, 404, 89, 33);
 		panelThemHD.add(btnThoat);
 		
@@ -197,6 +204,7 @@ public class HoaDonFRM2 extends JFrame {
 		panelThemHD.add(lblThanhTien);
 		
 		JButton btnThemCTHD = new JButton("Thêm chi tiết HĐ");
+		btnThemCTHD.setBackground(new Color(245, 245, 220));
 
 		btnThemCTHD.setBounds(461, 458, 135, 26);
 		btnThemCTHD.setEnabled(false);
@@ -233,7 +241,7 @@ public class HoaDonFRM2 extends JFrame {
 						break;
 					}
 				}
-				if(flag==2) JOptionPane.showMessageDialog(null,"Mã KH không hop le.");
+				if(flag==2) JOptionPane.showMessageDialog(null,"Mã KH không hợp lệ.");
 				if(mahd.equals("")) flag=1;
 				if(makh.equals("")) flag=1;
 				if(flag==0)
@@ -287,7 +295,7 @@ public class HoaDonFRM2 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.exit(1);
+				setVisible(false);
 			}
 		});
 		btnDatLai.addActionListener(new ActionListener() {

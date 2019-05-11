@@ -57,6 +57,7 @@ public class ChangFRM extends JFrame {
 			public void run() {
 				try {
 					ChangFRM frame = new ChangFRM();
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -95,8 +96,9 @@ public class ChangFRM extends JFrame {
           
 		
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Quản lý chặng bay.");
 		setBounds(100, 100, 1133, 678);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

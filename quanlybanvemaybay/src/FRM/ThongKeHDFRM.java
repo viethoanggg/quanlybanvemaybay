@@ -59,8 +59,10 @@ public class ThongKeHDFRM extends JFrame {
 	 */
 	public ThongKeHDFRM() {
 		setAutoRequestFocus(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 673, 545);
+		setLocationRelativeTo(null);
+		setTitle("Thống kê doan thu.");
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

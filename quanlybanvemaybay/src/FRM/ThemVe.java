@@ -33,6 +33,7 @@ import java.util.Date;
 import java.util.Vector;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ThemVe extends JFrame {
 
@@ -90,7 +91,10 @@ public class ThemVe extends JFrame {
 		setAutoRequestFocus(false);
 		
 		setBounds(100, 100, 902, 537);
+		setLocationRelativeTo(null);
+		setTitle("Thêm vé máy bay.");
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(245, 245, 245));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -106,6 +110,7 @@ public class ThemVe extends JFrame {
 		contentPane.add(txtMaVe);
 		
 		JComboBox cbbMaVe = new JComboBox();
+		cbbMaVe.setBackground(Color.WHITE);
 		
 		cbbMaVe.setModel(new DefaultComboBoxModel(new String[] {"TN_", "NN_"}));
 		cbbMaVe.setBounds(221, 23, 74, 30);
@@ -156,15 +161,19 @@ public class ThemVe extends JFrame {
 		contentPane.add(txtVISA);
 		
 		JButton btnDatLai = new JButton("Đặt lai");
+		
+		btnDatLai.setBackground(Color.WHITE);
 		btnDatLai.setBounds(369, 453, 89, 30);
 		contentPane.add(btnDatLai);
 		
 		JButton btnThem = new JButton("Thêm");
+		btnThem.setBackground(Color.WHITE);
 		
 		btnThem.setBounds(244, 453, 89, 30);
 		contentPane.add(btnThem);
 		
 		JButton btnThoat = new JButton("Thoát");
+		btnThoat.setBackground(Color.WHITE);
 		
 		btnThoat.setBounds(492, 453, 89, 30);
 		contentPane.add(btnThoat);
@@ -194,6 +203,7 @@ public class ThemVe extends JFrame {
 		panel.add(txtGaDen);
 		
 		JButton btnTimKiem = new JButton("Tìm");
+		btnTimKiem.setBackground(Color.WHITE);
 		
 		btnTimKiem.setBounds(722, 12, 89, 25);
 		panel.add(btnTimKiem);
@@ -237,8 +247,9 @@ public class ThemVe extends JFrame {
 		contentPane.add(label_7);
 		
 		JComboBox cbbHangVe = new JComboBox();
+		cbbHangVe.setBackground(Color.WHITE);
 		
-		cbbHangVe.setModel(new DefaultComboBoxModel(new String[] {"Economy Class", "Business class", "Fisrt Class", "Premium Class"}));
+		cbbHangVe.setModel(new DefaultComboBoxModel(new String[] {"Economy Class", "Business class", "First Class", "Premium Class"}));
 		cbbHangVe.setBounds(592, 336, 174, 30);
 		contentPane.add(cbbHangVe);
 		
@@ -247,6 +258,7 @@ public class ThemVe extends JFrame {
 		contentPane.add(lblGimGi);
 		
 		JComboBox cbbGiamGia = new JComboBox();
+		cbbGiamGia.setBackground(Color.WHITE);
 		cbbGiamGia.setModel(new DefaultComboBoxModel(new String[] {"0", "10", "20", "50"}));
 		cbbGiamGia.setBounds(125, 389, 74, 30);
 		contentPane.add(cbbGiamGia);
@@ -276,9 +288,10 @@ public class ThemVe extends JFrame {
 		lblHng.setBounds(314, 332, 46, 30);
 		contentPane.add(lblHng);
 		
-		JButton btnNewButton = new JButton("New KH");
+		JButton btnNewButton = new JButton("Tạo KH mới");
+		btnNewButton.setBackground(Color.WHITE);
 		
-		btnNewButton.setBounds(787, 23, 89, 27);
+		btnNewButton.setBounds(779, 23, 97, 27);
 		contentPane.add(btnNewButton);
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 		btnNewButton.addActionListener(new ActionListener() {
@@ -523,9 +536,13 @@ public class ThemVe extends JFrame {
 					vmb.setMaKH(makh);
 					vmb.setMaCB(txtMaChuyenBay.getText());
 					vmb.setTenHangVe(cbbHangVe.getItemAt(cbbHangVe.getSelectedIndex()).toString());
-					vmb.setVisa(txtVISA.getText());
+					
 					vmb.setMaGhe(maghe);
 					vmb.setHang(txtHang.getText());
+					if(cbbMaVe.getSelectedIndex()==1)
+						vmb.setVisa(txtVISA.getText());
+					else 
+						vmb.setVisa("");
 					if(cbbMaVe.getSelectedIndex()==0)
 						vmb.setGiaTriGiam(Integer.valueOf(cbbGiamGia.getItemAt(cbbGiamGia.getSelectedIndex()).toString()));
 					if(cbbMaVe.getSelectedIndex()==1)
@@ -563,7 +580,6 @@ public class ThemVe extends JFrame {
 					VeMayBayBUS bus=new VeMayBayBUS();
 					bus.them(vmb);
 					cbbus.capnhatSoGheTrong();
-					cbbus.docDSChuyenBay();
 					JOptionPane.showMessageDialog(null,"Đã thêm vé.");
 				}
 			}
@@ -572,6 +588,11 @@ public class ThemVe extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+			}
+		});
+		btnDatLai.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
 	}

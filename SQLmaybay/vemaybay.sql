@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 10, 2019 lúc 08:28 AM
+-- Thời gian đã tạo: Th5 11, 2019 lúc 05:36 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.2.17
 
@@ -36,7 +36,7 @@ CREATE TABLE `vemaybay` (
   `TenHangVe` varchar(20) NOT NULL,
   `GiaVe` int(20) NOT NULL,
   `Hang` varchar(30) NOT NULL,
-  `GiaTriGiam` double NOT NULL,
+  `GiaTriGiam` int(11) NOT NULL,
   `Visa` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -53,7 +53,7 @@ INSERT INTO `vemaybay` (`MaVe`, `MaGhe`, `MaKH`, `MaCB`, `TenHangVe`, `GiaVe`, `
 ('NN_07', 'MGPC01', 'KHD_07', 'VN651', 'Premium Class', 6200000, 'Jetstar Pacific Airlines', 0, 'VISA856844'),
 ('NN_08', 'MGBC01', 'KHD_08', 'VN156', 'Business Class', 1700000, 'VietJet Air', 0, 'VISA354344'),
 ('NN_09', 'MGEC01', 'KHD_02', 'VN315', 'Economy Class', 5800000, 'Jetstar Pacific Airlines', 0, 'VISA847432'),
-('NN_11', 'P04', 'KHD_11', 'VN380', 'Business Class', 400000, 'Vietnam Airlines', 0, 'VISA453222'),
+('NN_11', 'MGEC04', 'KHD_11', 'VN380', 'Business Class', 400000, 'Vietnam Airlines', 0, 'VISA453222'),
 ('NN_12', 'MGFC01', 'KHD_18', 'VN315', 'First Class', 6100000, 'VietJet Air', 0, 'VISA123456'),
 ('NN_13', 'MGFC01', 'KHD_25', 'VN830', 'First Class', 1995000, 'Vietnam Airlines', 0, 'VISA254345'),
 ('TN_01', 'MGBC01', 'KHD_01', 'VN431', 'Business Class', 1620000, 'Vietnam Airlines', 10, ''),

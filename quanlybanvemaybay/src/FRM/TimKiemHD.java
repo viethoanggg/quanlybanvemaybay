@@ -77,8 +77,8 @@ public class TimKiemHD extends JFrame {
 	}
 	public TimKiemHD() {
 		setAutoRequestFocus(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 665, 585);
+		
+		setBounds(100, 100, 665, 587);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -88,16 +88,10 @@ public class TimKiemHD extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLACK);
 		panel.setBounds(0, 0, 649, 57);
+		setLocationRelativeTo(null);
+		setTitle("Tìm kiếm hóa đơn");
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		JButton btnXuatFile = new JButton("Xuất file");
-		btnXuatFile.setIcon(new ImageIcon("images/icons8-export-30.png"));
-		btnXuatFile.setHorizontalAlignment(SwingConstants.LEFT);
-		btnXuatFile.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnXuatFile.setBackground(Color.WHITE);
-		btnXuatFile.setBounds(497, 11, 142, 36);
-		panel.add(btnXuatFile);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 126, 629, 186);
@@ -147,14 +141,14 @@ public class TimKiemHD extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "T\u00ECm ki\u1EBFm n\u00E2ng cao", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(10, 366, 629, 168);
+		panel_1.setBounds(10, 366, 629, 180);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Th\u1EDDi gian", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Th\u1EDDi gian", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_2.setBackground(Color.WHITE);
-		panel_2.setBounds(10, 23, 432, 61);
+		panel_2.setBounds(10, 37, 432, 61);
 		panel_1.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -179,7 +173,7 @@ public class TimKiemHD extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "S\u1ED1 ti\u1EC1n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(10, 94, 432, 63);
+		panel_3.setBounds(10, 106, 432, 63);
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
 		
@@ -209,13 +203,13 @@ public class TimKiemHD extends JFrame {
 		btnTimKiemNangCao_Left.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnTimKiemNangCao_Left.setBorder(new EmptyBorder(0,0,0,0));
 		btnTimKiemNangCao_Left.setBackground(Color.WHITE);
-		btnTimKiemNangCao_Left.setBounds(440, 119, 29, 27);
+		btnTimKiemNangCao_Left.setBounds(441, 129, 29, 27);
 		panel_1.add(btnTimKiemNangCao_Left);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new TitledBorder(null, "Qu\u00FD", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_4.setBackground(Color.WHITE);
-		panel_4.setBounds(491, 23, 128, 134);
+		panel_4.setBounds(491, 37, 128, 132);
 		panel_1.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -241,6 +235,11 @@ public class TimKiemHD extends JFrame {
 		btnTimKiemNangCao_Right.setBackground(Color.WHITE);
 		btnTimKiemNangCao_Right.setBounds(89, 96, 29, 27);
 		panel_4.add(btnTimKiemNangCao_Right);
+		
+		JLabel label_3 = new JLabel("( Nhập 1 textfield để truy xuất khoảng bé hoặc lớn. )");
+		label_3.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		label_3.setBounds(172, 17, 270, 26);
+		panel_1.add(label_3);
 		
 		setTable();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -341,14 +340,6 @@ public class TimKiemHD extends JFrame {
 						bus.timKiemNangCao(a ,b,txtTKNC_GiaTu.getText(),txtTKNC_GiaDen.getText());
 						newDataModel();
 					}
-				}
-			});
-			btnXuatFile.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					file =new File("hoadon.xls");
-					xuatFileExcel(tblHoaDon, file);
-					JOptionPane.showMessageDialog(null,"Đã xuất ra file excel.");
 				}
 			});
 			btnXemCTHD.addActionListener(new ActionListener() {
