@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPHoaDon" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ae3c113-c2b3-41fc-af09-cb04dd3a2252">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HoaDon"/>
+	<subDataset name="chitiethd" uuid="cd5a5023-177a-42f9-ad60-4733b9228870">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HoaDon"/>
+		<parameter name="dschitiethd" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select * from chitiethd]]>
+		</queryString>
+		<field name="MaHD" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MaHD"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+		</field>
+		<field name="MaVe" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MaVe"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+		</field>
+		<field name="MaHangVe" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="MaHangVe"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+		</field>
+		<field name="TenKH" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TenKH"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+		</field>
+		<field name="TenChang" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="TenChang"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+		</field>
+		<field name="GiaVe" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="GiaVe"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+		</field>
+		<field name="VISA" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="VISA"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+		</field>
+	</subDataset>
+	<parameter name="MaHD" class="java.lang.String"/>
+	<parameter name="TenKH" class="java.lang.String"/>
+	<parameter name="TenNV" class="java.lang.String"/>
+	<parameter name="NgayDatVe" class="java.lang.String"/>
+	<parameter name="SoLuong" class="java.lang.String"/>
+	<parameter name="ThanhTien" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM chitiethd
+where MaHD=$P{MaHD}]]>
+	</queryString>
+	<field name="MaHD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MaHD"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+	</field>
+	<field name="MaVe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MaVe"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+	</field>
+	<field name="MaHangVe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="MaHangVe"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+	</field>
+	<field name="TenKH" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TenKH"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+	</field>
+	<field name="TenChang" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="TenChang"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+	</field>
+	<field name="GiaVe" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="GiaVe"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+	</field>
+	<field name="VISA" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="VISA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="chitiethd"/>
+	</field>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{MaHD}]]></groupExpression>
+		<groupFooter>
+			<band height="70">
+				<rectangle>
+					<reportElement x="440" y="8" width="120" height="31" backcolor="#FCFC8B" uuid="b4c2691b-a0dd-4bfa-a1d4-4561cef14e4d"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="440" y="10" width="120" height="30" uuid="6464d18f-4d2f-485e-88b6-9860363e8737"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Thành tiền]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="440" y="40" width="120" height="30" uuid="cd7da4b1-48e0-451b-a29b-cbdceee85b40"/>
+					<box>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{ThanhTien}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-21" width="595" height="92" backcolor="#006699" uuid="c742577a-6166-41ab-87a6-411479850de2"/>
+				<staticText>
+					<reportElement x="106" y="20" width="364" height="50" forecolor="#FFFFFF" uuid="a6b33d90-f8f1-408e-a89c-9d1bd52c88fb"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="34" isBold="true" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+					</textElement>
+					<text><![CDATA[HOÁ ĐƠN]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="177" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="147" width="560" height="30" backcolor="#ACFAF9" uuid="4fe152d7-a041-4d3f-987a-b934689252e8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="147" width="60" height="30" backcolor="#AFFAEF" uuid="041c2eb7-e8ee-4880-b3f1-1304e2901e1e"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MaVe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="147" width="70" height="30" backcolor="#AFFAEF" uuid="1d261c88-2eb2-4b46-9ef2-8a065be143b2"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MaHangVe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="147" width="90" height="30" backcolor="#AFFAEF" uuid="8d3e469c-bfe6-4679-999b-bb957bca1ffb"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TenKH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="147" width="140" height="30" backcolor="#AFFAEF" uuid="133cdcf6-cf6c-45a1-8c50-9351222cf2b8"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TenChang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="147" width="100" height="30" backcolor="#AFFAEF" uuid="794de597-e334-4252-939f-703eca99b008"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GiaVe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="147" width="100" height="30" backcolor="#AFFAEF" uuid="47a497ea-0210-4088-a0ce-4bbdb02fd90e"/>
+				<box topPadding="1" leftPadding="1" bottomPadding="1">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VISA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="100" height="30" uuid="cac0ed76-150a-4390-9133-b9554e03c781"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MaHD]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="21" width="130" height="29" uuid="18b469bc-4a40-4bab-a4fa-6300d0a6dce7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{MaHD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="100" height="30" uuid="ee01569a-74b4-4787-9898-19bd79d90e22"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên nhân viên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="20" width="100" height="30" uuid="1536a725-d4ad-44b4-8d03-ec5ed5214c9f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày đặt vé]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="50" width="100" height="30" uuid="9d65284c-e8a8-4fb6-bcf6-9d35650a5019"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số lượng vé]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="50" width="130" height="30" uuid="21f69525-53ea-4501-beb4-080d0c08c92a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TenKH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="80" width="130" height="30" uuid="9b2d95b4-fd7e-415a-9d9e-9b3eaf7ec262"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TenNV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="20" width="110" height="30" uuid="13e5c546-2cb2-4d81-b278-6ed7cd745238"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NgayDatVe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="50" width="110" height="30" uuid="a67ea90c-207b-47ec-a86b-c3a08fe68e7f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SoLuong}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="50" width="100" height="30" uuid="4432b217-a423-4864-84ea-7a90cca2bcb1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên khách hàng]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="60" height="30" uuid="e5d7f9d4-68bc-42d8-948b-b21bd8bbd314"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaVe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="70" height="30" uuid="3e7f29cb-fa1b-4dcd-9491-3a867f85cd1f"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaHangVe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="0" width="90" height="30" uuid="5bb9b0bf-e4e1-4847-a0e0-817fab5495e1"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenKH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="140" height="30" uuid="8408a7ac-9a4c-42f5-95be-bf57ea96c4aa"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenChang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="0" width="100" height="30" uuid="2aba2730-ab4e-44c2-8956-2c21b6ede8f8"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GiaVe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="100" height="30" uuid="c93fce01-54fc-4f99-9bb1-139f1f5b4632"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VISA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

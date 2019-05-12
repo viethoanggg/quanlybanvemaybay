@@ -56,8 +56,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+
 public class HoaDonFRM extends JFrame {
 	
 	private JPanel HoaDon;
@@ -267,8 +266,9 @@ public class HoaDonFRM extends JFrame {
 		btnCapNhatDSHD.setBackground(Color.WHITE);
 		
 		JButton btnReport = new JButton("Report");
+		btnReport.setBackground(Color.WHITE);
 		
-		btnReport.setBounds(576, 17, 89, 23);
+		btnReport.setBounds(584, 11, 73, 34);
 		panel.add(btnReport);
 		btnCapNhatDSHD.addActionListener(new ActionListener()
 		{
@@ -415,71 +415,58 @@ public class HoaDonFRM extends JFrame {
 		btnReport.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-					
-				String MaHD=txtMaHD_HD.getText();
-				int SL=0;
-				int TT=0;
-				String MaKH=null;
-				String NDV=null;
-				String tenKH=null;
 				
-				try {
-					//PropertyConfigurator.configure("log4j.properties");
-					JasperReport jasperReport = JasperCompileManager.compileReport("HoaDon.jrxml");
-			       // Tham số truyền vào báo cáo.
-			       Map<String, Object> parameters = new HashMap<String, Object>();
-			 
-			       ChiTietHDBUS ctbus = new ChiTietHDBUS();
-			       ctbus.docDSCTHD();
-			       HoaDonBUS hdbus=new HoaDonBUS();
-			       hdbus.docDSHD();
-			       KhachHangBUS khbus=new KhachHangBUS();
-			       khbus.docDSKH();
-			       
-			       
-			       parameters.put("MaHD",MaHD);
-			       for(HoaDonDTO hd : HoaDonBUS.dshd)
-			       {
-			    	   if(MaHD.equals(hd.getMaHD()))
-			    	   {
-			    		   SL=hd.getSoLuongVe();
-			    		   TT=hd.getThanhTien();
-			    		   MaKH=hd.getMaKH();
-			    		   NDV=hd.getNgayDatVe();
-			    	   }
-			       }
-			       
-			      /* for(KhachHangDTO kh : KhachHangBUS.dskh)
-			       {
-			    	   if(MaKH.equals(kh.getMaKH()))
-			    	   {
-			    		   tenKH=kh.getTenKH();
-			    	   }
-			       }*/
-			       //parameters.put("SoLuong",SL);
-			       //parameters.put("ThanhTien",TT);
-			       parameters.put("NgayDatVe",NDV);
-			       parameters.put("NguoiMua",tenKH);
-			       // DataSource
-			       // Đây là báo cáo đơn giản, không kết nối vào DB
-			       // vì vậy không cần nguồn dữ liệu.
-			       JRDataSource dataSource = new JREmptyDataSource();
-			      MySQLConnect c= new MySQLConnect();
-			       JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,dataSource);	 
-			       // Đảm bảo thư mục đầu ra tồn tại.
-			      /* File outDir = new File("report");
-			       outDir.mkdirs();*/
-			       JasperViewer.viewReport(jasperPrint,false);
-			       // Chạy báo cáo và export ra file PDF.
-			       JasperExportManager.exportReportToPdfFile(jasperPrint,
-			               "report/HoaDon.pdf");
-			 
-			       System.out.println("Done!");
-			       
-				} catch (JRException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				int i=tblHoaDon.getSelectedRow();
+				if(i>=0)
+				{
+					String MaHD=txtMaHD_HD.getText();
+					String SoLuong=txtSoLuongVe.getText();
+					String ThanhTien=txtThanhTien_HD.getText();
+					String NgayDatVe=txtNgayDatVe_HD.getText();
+					String mkh=txtMaKH_HD.getText();
+					String TenKH="";
+					KhachHangBUS khbus=new KhachHangBUS();
+					khbus.docDSKH();
+					
+					for(KhachHangDTO kh:KhachHangBUS.dskh)
+					{
+						if(mkh.equals(kh.getMaKH()))
+						{
+							TenKH=kh.getTenKH();
+							break;
+						}
+					}
+					
+					MySQLConnect c= new MySQLConnect("localhost","root","","quanlybanvemaybay");
+					c.Connect();
+					try {
+						//PropertyConfigurator.configure("log4j.properties");
+						JasperReport jasperReport = JasperCompileManager.compileReport("RPHoaDon.jrxml");
+				       // Tham số truyền vào báo cáo.
+				       Map<String, Object> parameters = new HashMap<String, Object>();
+				       parameters.put("MaHD",MaHD);
+				       parameters.put("TenKH",TenKH);
+				       parameters.put("TenNV",main.TenNV);
+				       parameters.put("NgayDatVe",NgayDatVe);
+				       parameters.put("SoLuong",SoLuong);
+				       parameters.put("ThanhTien",ThanhTien);
+				       JRDataSource dataSource = new JREmptyDataSource();
+				      
+				       JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters,c.getConnect());	 
+				       // Đảm bảo thư mục đầu ra tồn tại.
+				      /* File outDir = new File("report");
+				       outDir.mkdirs();*/
+				       JasperViewer.viewReport(jasperPrint,false);
+				       // Chạy báo cáo và export ra file PDF.
+				       JasperExportManager.exportReportToPdfFile(jasperPrint,"report/HoaDon.pdf");
+			
+				       
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
+				else JOptionPane.showMessageDialog(null,"Chọn hóa đơn cần report.");
 			}
 		});
 		
